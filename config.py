@@ -1,4 +1,0 @@
-def Config():
-    CLIENT_ID='f1b645b681544d408913e0f55784b3a6'
-    REDIRECT_URI='http://127.0.0.1:5000/'
-    AUTHENTICATION='Bearer'
