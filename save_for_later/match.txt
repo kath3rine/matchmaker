@@ -1,0 +1,43 @@
+import requests
+
+class Match:
+	CLIENT_ID='f1b645b681544d408913e0f55784b3a6'
+	CLIENT_SECRET='a2c5b97a944647d8bce6722c772adbc8'
+	REDIRECT_URI='http://127.0.0.1:5000/'
+	BASE_URL = 'https://api.spotify.com/v1/'
+	def __init__(self, user, playlist):
+		self.user = user
+		self.playlist = playlist
+		
+
+	def authorize():
+		auth_response = requests.post('https://accounts.spotify.com/api/token', {
+			'grant_type': 'client_credentials',
+			'client_id': 'f1b645b681544d408913e0f55784b3a6',
+			'client_secret': 'a2c5b97a944647d8bce6722c772adbc8',
+		})
+		auth_response_data = auth_response.json()
+		return auth_response_data['access_token']
+	
+	access_token = authorize()
+
+	headers = {
+    	'Authorization': 'Bearer {token}'.format(token=access_token)
+	}
+
+	def get_track(self,playlist_id):
+		r = requests.get(self.BASE_URL + 'playlists/' + playlist_id + '/tracks' )
+		r = r.json()
+
+	# test = 4
+
+	# def __init__(self, name, id):
+	# 	self.name = name
+	# 	self.id = id
+
+	# def product(self):
+	# 	return self.test ** 2
+	
+	
+
+	

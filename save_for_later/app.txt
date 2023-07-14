@@ -1,17 +1,19 @@
 from flask import Flask, request, render_template
-from match import authorize, get_track, track_info
+from match import Match
 
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template('index.html')
+  return render_template('index.html')
 
 @app.route('/match', methods=["GET", "POST"])
 def match():
   user1 = request.form['user1']
-  # user2 = request.form['user2']
-  out = track_info(user1)
+  user2 = request.form['user2']
+  # access_token = authorize()
+  x =  Match(user1, user2)
+  out = str(x.authorize())
   return render_template('match.html', out=out)
 
 if __name__ == '__main__':
