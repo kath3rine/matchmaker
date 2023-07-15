@@ -11,7 +11,7 @@ def home():
 def match():
   user1 = request.form['user1']
   # user2 = request.form['user2']
-  out = track_info(user1)
+  out = get_track(user1)
   return render_template('match.html', out=out)
 
 if __name__ == '__main__':

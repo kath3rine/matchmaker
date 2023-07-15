@@ -1,4 +1,5 @@
 import requests
+import pandas as pd
 
 CLIENT_ID='f1b645b681544d408913e0f55784b3a6'
 CLIENT_SECRET='a2c5b97a944647d8bce6722c772adbc8'
@@ -19,12 +20,17 @@ headers = {
     'Authorization': 'Bearer {token}'.format(token=access_token)
 }
 
+# FETCH DATA FROM API
 def get_track(playlist):
-	r = requests.get(BASE_URL + 'playlists/' + playlist + '/tracks', headers=headers )
+	r = requests.get(BASE_URL + 'playlists/' + playlist, headers=headers )
 	r = r.json()
-	return r['public']
+	lst = r['tracks']
+	ret = []
+	for track in lst['items']:
+		ret.append(track['track']['name'])
+	return ret
 
 def track_info(track_id):
 	r = requests.get(BASE_URL + 'audio-features/' + track_id, headers=headers)
 	r = r.json()
-	return r
+	return r['danceability']
