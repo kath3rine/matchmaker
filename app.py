@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from match import get_data, get_image, recommend, shared_artists, artist_info
+from match import get_data, get_image, recommend, artist_ids, find_shared, artist_info
 
 app = Flask(__name__)
 
@@ -25,7 +25,12 @@ def match():
   user1, user2 = get_data(uid1, 'users'), get_data(uid2, 'users') 
   playlist1, playlist2 = get_data(pid1, 'playlists'), get_data(pid2, 'playlists')
 
-  a = shared_artists(playlist1, playlist2) # shared artist ids
+  a1, a2 = artist_ids(playlist1), artist_ids(playlist2) # indiv. artist ids
+  a = find_shared(a1, a2) # shared artists' ids
+
+  # g1 user1 genre (strs)
+  # g2 user2 genre (strs)
+  # g shared genres
 
   ##### PROFILE PAGE #####
   # HEADER
@@ -41,7 +46,7 @@ def match():
   # s_genres = 'shared genres here'
   
   # BUBBLES
-  f_artists = 'fav artists here'
+  f_artists = artist_info(a2, 'name')
   # f_genres = 'fav genres here'
 
   # render match page

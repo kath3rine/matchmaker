@@ -36,22 +36,7 @@ def get_track_info(data, key):
 		r.append(track['track'][key])
 	return r
 
-# PARAM artist: list of artist objects
-# RETURNS: list of artist ids 
-def get_artist_ids(artists):
-	r = []
-	for i in artists:
-		r.append(i[0]['id'])
-	return r
-
-# PARAMS list1, list2: data to be compared
-# RETURNS set of items both playlists have in common
-def find_shared(list1, list2):
-	r = []
-	for i in list1:
-		if i in list2 and i not in r:
-			r.append(i)
-	return r
+########## COMPATIBILITY ##########
 
 ########## FEATURES ##########
 # functions called from app.py
@@ -66,6 +51,7 @@ def get_image(data):
 	return image['url']
 
 ### ABOUT ###
+
 # PARAMS ids: list of ids (artist or genre), mode: artist or genre
 # RETURNS: list of 5 songs, format "[title] by [artist]"
 def recommend(ids, mode):
@@ -86,12 +72,23 @@ def recommend(ids, mode):
 
 ### PROMPTS + BUBBLES ###
 
-# PARAMS data1, data2: lists of artist ids
-# RETURNS list of shared artists' ids
-def shared_artists(data1, data2):
-	artists1, artists2 = get_track_info(data1, 'artists'), get_track_info(data2, 'artists')
-	artist_ids1, artist_ids2 = get_artist_ids(artists1), get_artist_ids(artists2)
-	return find_shared(artist_ids1, artist_ids2)
+# PARAMS list1, list2: data to be compared
+# RETURNS set of items both playlists have in common
+def find_shared(list1, list2):
+	r = []
+	for i in list1:
+		if i in list2 and i not in r:
+			r.append(i)
+	return r
+
+# PARAM playlist json
+# RETURNS list of artists' ids
+def artist_ids(data):
+	artists = get_track_info(data, 'artists')
+	r = []
+	for i in artists:
+		r.append(i[0]['id'])
+	return r
 
 # PARAMS artist_ids: list of artist ids, key: target feature
 # RETURNS list of key feature for all artist
