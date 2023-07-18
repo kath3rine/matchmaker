@@ -34,18 +34,18 @@ def get_data(item_id, item_type):
 # RETURNS list containing values of the key in all tracks
 def get_track_info(data, key):
 	tracks = data['tracks']
-	l = []
+	r = []
 	for track in tracks['items']:
-		l.append(track['track'][key])
-	return l
+		r.append(track['track'][key])
+	return r
 
 # PARAM: artist: list of artist objects, key: target feature (either name or id)
 # RETURNS: list of artist ids 
 def get_artist_ids(artists):
-	l = []
+	r = []
 	for i in artists:
-		l.append(i[0]['id'])
-	return l
+		r.append(i[0]['id'])
+	return r
 
 # RETURNS audio features of a song
 def track_features(track_id):
@@ -55,11 +55,11 @@ def track_features(track_id):
 # PARAMS list1, list2: input data to be compared
 # RETURNS set of items both playlists have in common
 def find_shared(list1, list2):
-	l = []
+	r = []
 	for i in list1:
-		if i in list2 and i not in l:
-			l.append(i)
-	return l
+		if i in list2 and i not in r:
+			r.append(i)
+	return r
 
 ##### FEATURES #####
 
@@ -73,9 +73,26 @@ def shared_artists(data1, data2):
 # PARAMS artist_ids: list of artist ids, key: target feature
 # RETURNS list of key feature for all artis
 def artist_info(artist_ids, key):
-	l = []
+	r = []
 	for i in artist_ids:
 		data = get_data(i, 'artists')
-		l.append(data[key])
-	return l
+		r.append(data[key])
+	return r
 
+# PARAMS ids: list of ids (artist or genre), mode: artist or genre
+def get_recs(ids, mode):
+	seed = '='
+	for i in ids:
+		seed += i
+		seed += '%2C'# comma separator after each id
+	seed = seed[:-3] # remove the last '%2C'
+
+	data = requests.get(BASE_URL + 'recommendations?limit=5&seed_' + mode + seed, headers=headers)
+	data = data.json()
+
+	r = []
+	for track in data['tracks']:
+		temp = track['name'] + " by " + track['artists'][0]['name']
+		r.append(temp)
+
+	return r
