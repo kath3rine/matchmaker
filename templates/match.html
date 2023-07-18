@@ -4,11 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spotify Matchmaker</title>
+    <title>Tinderfy</title>
 </head>
 <body>
-    Shared artists: {{out1}}
-</br></br>
-    Recommended songs: {{out2}}
+        <!-- HEADER -->
+        <img src={{pfp}}> </br>
+        <h1> {{name}} </h1>
+        <h3> {{compatibility}}% compatible </h3>
+
+        <!-- ABOUT -->
+        <h2> Songs you'd both like:</h2>
+        {%for i in range(0, len_recs)%}
+            <li>{{recs[i]}}</li>
+        {%endfor%}</br>
+
+        <!-- PROMPTS -->
+        <h2> Prompts </h2>
+        <h3> Artists you both like are... </h3>
+        {%for i in range(0, len_s_artists)%}
+            <li>{{s_artists[i]}}</li>
+        {%endfor%}</br>
+
+        <!-- BUBBLES -->
+        <h2> Favorite Artists </h2>
+        {%for i in range(0, len_s_artists)%}
+            <li>{{s_artists[i]}}</li>
+        {%endfor%}</br>
+    
 </body>
 </html>

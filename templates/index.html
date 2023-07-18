@@ -4,22 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spotify Matchmaker</title>
+    <title>Tinderfy</title>
 </head>
 <body>
     <!--
         PLAYLIST 1: https://open.spotify.com/playlist/2b08l28qJ61zKFztCRrNOl?si=dbc23b7bc7d3480b
         PLAYLIST 2: https://open.spotify.com/playlist/6aTmvWaCEYUOy9xOH5aQ6I?si=30540fbdf2b6479e
-
-        2b08l28qJ61zKFztCRrNOl
-        6aTmvWaCEYUOy9xOH5aQ6I
     -->
     <form action="/match" method="POST">
         <label for="user1">User 1:</label>
-        <input type="text" id="user1" name="user1" placeholder="name">
+        <input type="text" id="user1" name="user1" placeholder="username">
+
+        <label for="playlist1">Playlist 1:</label>
+        <input type="text" id="playlist1" name="playlist1" placeholder="playlist link">
 
         <label for="user2">User 2:</label>
-        <input type="text" id="user2" name="user2" placeholder="name">
+        <input type="text" id="user2" name="user2" placeholder="username">
+
+        <label for="playlist2">Playlist 2:</label>
+        <input type="text" id="playlist2" name="playlist2" placeholder="playlist link"> 
 
         <input type="submit" value="Match">
     </form>

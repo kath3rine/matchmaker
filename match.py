@@ -1,7 +1,7 @@
 import requests
 from config import CLIENT_ID, CLIENT_SECRET
 
-##### ACCESS API #####
+########## ACCESS API ##########
 REDIRECT_URI='http://127.0.0.1:5000/'
 BASE_URL = 'https://api.spotify.com/v1/'
 
@@ -22,12 +22,12 @@ headers = {
 ########## HELPER FUNCTIONS ##########
 
 # PARAMS item_id: id of object, item_type: type of object (artist, playlist, etc)
-# RETURNS json file of all playlist data
+# RETURNS json file of object's data
 def get_data(item_id, item_type):
 	data = requests.get(BASE_URL + item_type + '/' + item_id, headers=headers )
 	return data.json()
 
-# PARAMS data: json of all playlist data; key: term/feature we're looking for
+# PARAMS data: json of all playlist data, key: term/feature we're looking for
 # RETURNS list containing values of the key in all tracks
 def get_track_info(data, key):
 	tracks = data['tracks']
@@ -36,7 +36,7 @@ def get_track_info(data, key):
 		r.append(track['track'][key])
 	return r
 
-# PARAM: artist: list of artist objects, key: target feature (either name or id)
+# PARAM artist: list of artist objects
 # RETURNS: list of artist ids 
 def get_artist_ids(artists):
 	r = []
@@ -44,13 +44,7 @@ def get_artist_ids(artists):
 		r.append(i[0]['id'])
 	return r
 
-# PARAM track id
-# RETURNS audio features of a song
-def track_features(track_id):
-	features = requests.get(BASE_URL + 'audio-features/' + track_id, headers=headers)
-	return features.json()
-
-# PARAMS list1, list2: input data to be compared
+# PARAMS list1, list2: data to be compared
 # RETURNS set of items both playlists have in common
 def find_shared(list1, list2):
 	r = []
@@ -62,30 +56,23 @@ def find_shared(list1, list2):
 ########## FEATURES ##########
 # functions called from app.py
 
-# PARAMS data1, data2: jsons of data from each playlist
-# RETURNS list of shared artists' ids
-def shared_artists(data1, data2):
-	artists1, artists2 = get_track_info(data1, 'artists'), get_track_info(data2, 'artists')
-	artist_ids1, artist_ids2 = get_artist_ids(artists1), get_artist_ids(artists2)
-	return find_shared(artist_ids1, artist_ids2)
+### HEADER ###
 
-# PARAMS artist_ids: list of artist ids, key: target feature
-# RETURNS list of key feature for all artis
-def artist_info(artist_ids, key):
-	r = []
-	for i in artist_ids:
-		data = get_data(i, 'artists')
-		r.append(data[key])
-	return r
+# PARAMS item_id: id, item_type: user, album, etc
+# RETURNS link to image
+def get_image(data):
+	images = data['images']
+	image = images[0]# first obj in ImageObject array
+	return image['url']
 
+### ABOUT ###
 # PARAMS ids: list of ids (artist or genre), mode: artist or genre
-# RETURNS: list of 5 songs- "[title] by [artist]""
-def get_recs(ids, mode):
+# RETURNS: list of 5 songs, format "[title] by [artist]"
+def recommend(ids, mode):
 	seed = '='
 	for i in ids:
-		seed += i
-		seed += '%2C'# comma separator after each id
-	seed = seed[:-3] # remove the last '%2C'
+		seed += (i + '%2C') # add item + comma
+	seed = seed[: -3] # remove the last comma'
 
 	data = requests.get(BASE_URL + 'recommendations?limit=5&seed_' + mode + seed, headers=headers)
 	data = data.json()
@@ -95,4 +82,22 @@ def get_recs(ids, mode):
 		temp = track['name'] + " by " + track['artists'][0]['name']
 		r.append(temp)
 
+	return r
+
+### PROMPTS + BUBBLES ###
+
+# PARAMS data1, data2: lists of artist ids
+# RETURNS list of shared artists' ids
+def shared_artists(data1, data2):
+	artists1, artists2 = get_track_info(data1, 'artists'), get_track_info(data2, 'artists')
+	artist_ids1, artist_ids2 = get_artist_ids(artists1), get_artist_ids(artists2)
+	return find_shared(artist_ids1, artist_ids2)
+
+# PARAMS artist_ids: list of artist ids, key: target feature
+# RETURNS list of key feature for all artist
+def artist_info(artist_ids, key):
+	r = []
+	for i in artist_ids:
+		data = get_data(i, 'artists')
+		r.append(data[key])
 	return r

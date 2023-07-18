@@ -1,2 +1,2 @@
-# ignore config file (w/ spotify api keys)
-config
+config.py 
+ignore 
