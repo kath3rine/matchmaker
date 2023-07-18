@@ -19,7 +19,7 @@ headers = {
     'Authorization': 'Bearer {token}'.format(token=access_token)
 }
 
-########## HELPER FUNCTIONS ##########
+########## HELPERS ##########
 
 # PARAMS item_id: id of object, item_type: type of object (artist, playlist, etc)
 # RETURNS json file of object's data
@@ -36,12 +36,12 @@ def get_track_info(data, key):
 		r.append(track['track'][key])
 	return r
 
+
 ########## COMPATIBILITY ##########
 
-########## FEATURES ##########
-# functions called from app.py
 
-### HEADER ###
+# everything below is called from app.py
+############# HEADER #############
 
 # PARAMS item_id: id, item_type: user, album, etc
 # RETURNS link to image
@@ -50,7 +50,8 @@ def get_image(data):
 	image = images[0]# first obj in ImageObject array
 	return image['url']
 
-### ABOUT ###
+
+########## ABOUT ##########
 
 # PARAMS ids: list of ids (artist or genre), mode: artist or genre
 # RETURNS: list of 5 songs, format "[title] by [artist]"
@@ -70,7 +71,7 @@ def recommend(ids, mode):
 
 	return r
 
-### PROMPTS + BUBBLES ###
+########## PROMPTS + BUBBLES ##########
 
 # PARAMS list1, list2: data to be compared
 # RETURNS set of items both playlists have in common
@@ -95,8 +96,9 @@ def artist_ids(data):
 def artist_info(artist_ids, key):
 	r = []
 	for i in artist_ids:
-		data = get_data(i, 'artists')
-		r.append(data[key])
+		if i not in r:
+			data = get_data(i, 'artists')
+			r.append(data[key])
 	return r
 
 # PARAM list of artist ids

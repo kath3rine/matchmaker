@@ -7,6 +7,7 @@
     <title>Tinderfy</title>
 </head>
 <body>
+    <div class="container" id="match-container"> 
         <!-- HEADER -->
         <img src={{pfp}}> </br>
         <span>
@@ -28,16 +29,24 @@
 
             <div class="prompt" id="artists-prompt">
                 <h3> Artists you both like are... </h3>
-                {%for i in range(0, len_s_artists)%}
-                    <li>{{s_artists[i]}}</li>
-                {%endfor%}</br>
+                {% if s_artists == "none :(" %}
+                    <li> none :(</li>
+                {% else %}
+                    {%for i in range(0, len_s_artists)%}
+                        <li>{{s_artists[i]}}</li>
+                    {%endfor%}</br>
+                {% endif %}
             </div>
 
             <div class="prompt" id="genres-prompt">
                 <h3> Genres you both like are... </h3>
-                {%for i in range(0, len_s_genres)%}
-                    <li>{{s_genres[i]}}</li>
-                {%endfor%}</br>
+                {% if s_genres == "none :(" %}
+                    <li> none :(</li>
+                {% else %}
+                    {%for i in range(0, len_s_genres)%}
+                        <li>{{s_genres[i]}}</li>
+                    {%endfor%}</br>
+                {% endif %}
             </div>
         </div>
 
@@ -56,9 +65,29 @@
             {%endfor%}</br>
         </div>
 
+        <!-- BUTTONS -->
+        <span id="buttons">
+            <form action="/dislike" method="POST">
+                <input type="submit" value="dislike">
+            </form>
+
+            <form action="/like" method="POST">
+                <input type="submit" value="super like">
+            </form>
+
+            <form action="/like" method="POST">
+                <input type="submit" value="like">
+            </form>
+        </span>
+    </div>
+
         <!-- FOOTER -->
         <form action="/" method="POST">
             <input type="submit" value="Homepage">
+        </form>
+
+        <form action="/saved" method="POST">
+            <input type="submit" value="View Matches">
         </form>
     
 </body>

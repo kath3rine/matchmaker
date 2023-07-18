@@ -6,10 +6,13 @@ app = Flask(__name__)
 # https://open.spotify.com/user/kli-17?si=dc7771a37b7c480f
 # https://open.spotify.com/playlist/2b08l28qJ61zKFztCRrNOl?si=dbc23b7bc7d3480b
 # https://open.spotify.com/playlist/6aTmvWaCEYUOy9xOH5aQ6I?si=30540fbdf2b6479e
+# https://open.spotify.com/playlist/5t1y9F77hIHGFIUJbdy2PH?si=468e510d221749d8
+
+matches = []
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template('index.html')
+  return render_template('index.html')
 
 @app.route('/match', methods=["GET", "POST"])
 def match():
@@ -38,21 +41,42 @@ def match():
   compatibility = '69'# filler value
 
   # ABOUT
-  recs = recommend(a, 'artists')
+  if len(a) != 0: # seed = shared artists
+    recs = recommend(a, 'artists')
+  elif len(g) != 0: # seed = shared genres
+    recs = recommend(g, 'genres')
+  else: # seed = first 2 artists from each playlist
+    temp = [a1[0], a1[1], a2[0], a2[1]]
+    recs = recommend(temp, 'artists')
+
 
   # PROMPTS
-  s_artists = artist_info(a, 'name') if len(artist_info(a, 'name')) != 0 else 'none :('
+  s_artists = 'none :(' if len(a) == 0 else artist_info(a, 'name')[ : 5]
+  s_genres = 'none :(' if len(g) == 0 else g[ : 5]
   
   # BUBBLES
-  f_artists = artist_info(a2, 'name')
+  f_artists = artist_info(a2, 'name')[ : 5]
+  f_genres = g2[ : 5]
 
   # render match page
   return render_template('match.html', pfp=pfp, name=name, compatibility=compatibility, 
     recs=recs, len_recs = len(recs), 
     s_artists=s_artists, len_s_artists=len(s_artists), 
-    s_genres=g, len_s_genres = len(g),
+    s_genres=s_genres, len_s_genres = len(s_genres),
     f_artists=f_artists, len_f_artists=len(f_artists),
-    f_genres=g2, len_f_genres = len(g2))
+    f_genres=f_genres, len_f_genres = len(f_genres))
+
+@app.route('/dislike', methods=['GET', 'POST'])
+def dislike():
+  return render_template('index.html')
+
+@app.route('/like', methods=['GET', 'POST'])
+def like():
+  return render_template('index.html')
+
+@app.route('/saved', methods=['GET', 'POST'])
+def saved():
+  return render_template('saved.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
