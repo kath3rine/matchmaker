@@ -22,7 +22,7 @@ headers = {
     'Authorization': 'Bearer {token}'.format(token=access_token)
 }
 
-##### HELPER FUNCTIONS #####
+########## HELPER FUNCTIONS ##########
 
 # PARAMS item_id: id of object, item_type: type of object (artist, playlist, etc)
 # RETURNS json file of all playlist data
@@ -47,6 +47,7 @@ def get_artist_ids(artists):
 		r.append(i[0]['id'])
 	return r
 
+# PARAM track id
 # RETURNS audio features of a song
 def track_features(track_id):
 	features = requests.get(BASE_URL + 'audio-features/' + track_id, headers=headers)
@@ -61,7 +62,8 @@ def find_shared(list1, list2):
 			r.append(i)
 	return r
 
-##### FEATURES #####
+########## FEATURES ##########
+# functions called from app.py
 
 # PARAMS data1, data2: jsons of data from each playlist
 # RETURNS list of shared artists' ids
@@ -80,6 +82,7 @@ def artist_info(artist_ids, key):
 	return r
 
 # PARAMS ids: list of ids (artist or genre), mode: artist or genre
+# RETURNS: list of 5 songs- "[title] by [artist]""
 def get_recs(ids, mode):
 	seed = '='
 	for i in ids:
