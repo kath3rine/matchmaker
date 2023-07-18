@@ -1,10 +1,7 @@
 import requests
-# import pandas as pd
+from config import CLIENT_ID, CLIENT_SECRET
 
 ##### ACCESS API #####
-
-CLIENT_ID='f1b645b681544d408913e0f55784b3a6'
-CLIENT_SECRET='a2c5b97a944647d8bce6722c772adbc8'
 REDIRECT_URI='http://127.0.0.1:5000/'
 BASE_URL = 'https://api.spotify.com/v1/'
 
