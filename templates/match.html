@@ -25,10 +25,18 @@
         <!-- PROMPTS -->
         <div class="section" id="prompts">
             <h2> Prompts </h2>
+
             <div class="prompt" id="artists-prompt">
                 <h3> Artists you both like are... </h3>
                 {%for i in range(0, len_s_artists)%}
                     <li>{{s_artists[i]}}</li>
+                {%endfor%}</br>
+            </div>
+
+            <div class="prompt" id="genres-prompt">
+                <h3> Genres you both like are... </h3>
+                {%for i in range(0, len_s_genres)%}
+                    <li>{{s_genres[i]}}</li>
                 {%endfor%}</br>
             </div>
         </div>
@@ -41,9 +49,16 @@
             {%endfor%}</br>
         </div>
 
+        <div class="section" id="bubble2">
+            <h2> Favorite Genres </h2>
+            {%for i in range(0, len_f_genres)%}
+                <li>{{f_genres[i]}}</li>
+            {%endfor%}</br>
+        </div>
+
         <!-- FOOTER -->
         <form action="/" method="POST">
-            <input type="homepage" value="Homepage">
+            <input type="submit" value="Homepage">
         </form>
     
 </body>

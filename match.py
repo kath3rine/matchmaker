@@ -98,3 +98,14 @@ def artist_info(artist_ids, key):
 		data = get_data(i, 'artists')
 		r.append(data[key])
 	return r
+
+# PARAM list of artist ids
+# RETURN list of genres (str)
+def genres(artist_ids):
+	r = []
+	for i in artist_ids:
+		data = get_data(i, 'artists')
+		genres = data['genres']
+		if genres[0] not in r:
+			r.append(genres[0])
+	return r

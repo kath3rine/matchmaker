@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from match import get_data, get_image, recommend, artist_ids, find_shared, artist_info
+from match import get_data, get_image, recommend, artist_ids, find_shared, artist_info, genres
 
 app = Flask(__name__)
 
@@ -25,12 +25,11 @@ def match():
   user1, user2 = get_data(uid1, 'users'), get_data(uid2, 'users') 
   playlist1, playlist2 = get_data(pid1, 'playlists'), get_data(pid2, 'playlists')
 
-  a1, a2 = artist_ids(playlist1), artist_ids(playlist2) # indiv. artist ids
-  a = find_shared(a1, a2) # shared artists' ids
-
-  # g1 user1 genre (strs)
-  # g2 user2 genre (strs)
-  # g shared genres
+  # get artists and genres
+  a1, a2 = artist_ids(playlist1), artist_ids(playlist2) 
+  a = find_shared(a1, a2) 
+  g1, g2 = genres(a1), genres(a2)
+  g = find_shared(g1, g2)
 
   ##### PROFILE PAGE #####
   # HEADER
@@ -43,17 +42,17 @@ def match():
 
   # PROMPTS
   s_artists = artist_info(a, 'name') if len(artist_info(a, 'name')) != 0 else 'none :('
-  # s_genres = 'shared genres here'
   
   # BUBBLES
   f_artists = artist_info(a2, 'name')
-  # f_genres = 'fav genres here'
 
   # render match page
   return render_template('match.html', pfp=pfp, name=name, compatibility=compatibility, 
     recs=recs, len_recs = len(recs), 
-    s_artists=s_artists, len_s_artists=len(s_artists),
-    f_artists=f_artists, len_f_artists=len(f_artists))
+    s_artists=s_artists, len_s_artists=len(s_artists), 
+    s_genres=g, len_s_genres = len(g),
+    f_artists=f_artists, len_f_artists=len(f_artists),
+    f_genres=g2, len_f_genres = len(g2))
 
 if __name__ == '__main__':
     app.run(debug=True)
