@@ -1,2 +1,3 @@
 config.py 
 ignore 
+__pycache__

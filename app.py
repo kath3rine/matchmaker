@@ -8,7 +8,7 @@ app = Flask(__name__)
 # https://open.spotify.com/playlist/6aTmvWaCEYUOy9xOH5aQ6I?si=30540fbdf2b6479e
 # https://open.spotify.com/playlist/5t1y9F77hIHGFIUJbdy2PH?si=468e510d221749d8
 
-matches = 0
+matches = []
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -18,10 +18,8 @@ def home():
 def match():
   
   # get urls/ids
-  uid1 = request.form['user1']
-  uid2 = request.form['user2']
-  pid1 = request.form['playlist1']
-  pid2 = request.form['playlist2']
+  uid1, uid2 = request.form['user1'], request.form['user2']
+  pid1, pid2 = request.form['playlist1'], request.form['playlist2']
   pid1, pid2 = pid1[34 : -20], pid2[34 : -20]
 
   # create jsons of data
@@ -65,14 +63,11 @@ def match():
     f_artists=f_artists, len_f_artists=len(f_artists),
     f_genres=f_genres, len_f_genres = len(f_genres))
 
-@app.route('/dislike', methods=['GET', 'POST'])
-def dislike():
-  return render_template('index.html')
-
 @app.route('/like', methods=['GET', 'POST'])
 def like():
+  x = request.form['name-here']
   global matches
-  matches += 1
+  matches.append(x)
   return render_template('index.html')
 
 @app.route('/saved', methods=['GET', 'POST'])
