@@ -8,7 +8,7 @@ app = Flask(__name__)
 # https://open.spotify.com/playlist/6aTmvWaCEYUOy9xOH5aQ6I?si=30540fbdf2b6479e
 # https://open.spotify.com/playlist/5t1y9F77hIHGFIUJbdy2PH?si=468e510d221749d8
 
-matches = []
+matches = 0
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -51,8 +51,8 @@ def match():
 
 
   # PROMPTS
-  s_artists = 'none :(' if len(a) == 0 else artist_info(a, 'name')[ : 5]
-  s_genres = 'none :(' if len(g) == 0 else g[ : 5]
+  s_artists = 'none :(' if len(a) == 0 else str(artist_info(a, 'name')[ : 5])[1 : -1]
+  s_genres = 'none :(' if len(g) == 0 else str(g[ : 5])[1 : -1]
   
   # BUBBLES
   f_artists = artist_info(a2, 'name')[ : 5]
@@ -61,8 +61,7 @@ def match():
   # render match page
   return render_template('match.html', pfp=pfp, name=name, compatibility=compatibility, 
     recs=recs, len_recs = len(recs), 
-    s_artists=s_artists, len_s_artists=len(s_artists), 
-    s_genres=s_genres, len_s_genres = len(s_genres),
+    s_artists=s_artists, s_genres=s_genres,
     f_artists=f_artists, len_f_artists=len(f_artists),
     f_genres=f_genres, len_f_genres = len(f_genres))
 
@@ -72,11 +71,13 @@ def dislike():
 
 @app.route('/like', methods=['GET', 'POST'])
 def like():
+  global matches
+  matches += 1
   return render_template('index.html')
 
 @app.route('/saved', methods=['GET', 'POST'])
 def saved():
-  return render_template('saved.html')
+  return render_template('saved.html', out=matches)
 
 if __name__ == '__main__':
     app.run(debug=True)

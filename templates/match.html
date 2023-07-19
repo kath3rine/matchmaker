@@ -29,24 +29,12 @@
 
             <div class="prompt" id="artists-prompt">
                 <h3> Artists you both like are... </h3>
-                {% if s_artists == "none :(" %}
-                    <li> none :(</li>
-                {% else %}
-                    {%for i in range(0, len_s_artists)%}
-                        <li>{{s_artists[i]}}</li>
-                    {%endfor%}</br>
-                {% endif %}
+                {{s_artists}}
             </div>
 
             <div class="prompt" id="genres-prompt">
                 <h3> Genres you both like are... </h3>
-                {% if s_genres == "none :(" %}
-                    <li> none :(</li>
-                {% else %}
-                    {%for i in range(0, len_s_genres)%}
-                        <li>{{s_genres[i]}}</li>
-                    {%endfor%}</br>
-                {% endif %}
+                {{s_genres}}
             </div>
         </div>
 

@@ -88,7 +88,8 @@ def artist_ids(data):
 	artists = get_track_info(data, 'artists')
 	r = []
 	for i in artists:
-		r.append(i[0]['id'])
+		if i[0]['id'] not in r:
+			r.append(i[0]['id'])
 	return r
 
 # PARAMS artist_ids: list of artist ids, key: target feature
