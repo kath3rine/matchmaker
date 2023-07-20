@@ -9,51 +9,8 @@
 <body>
     <div class="container" id="match-container"> 
         <form action="/like" method="POST">
-            <!-- HEADER -->
-            <img src={{pfp}}> </br>
-            <span>
-                <h1 id="match-name", name="match-name", value="match-name"> {{name}} </h1>
-                <h3> {{compatibility}}% compatible </h3>
-                <input type="text" value={{name}} id="name-here" name="name-here" placeholder="test">
-            </span>
-
-            <!-- ABOUT -->
-            <div class="section" id="about">
-                <h2> Songs you'd both like:</h2>
-                {%for i in range(0, len_recs)%}
-                    <li>{{recs[i]}}</li>
-                {%endfor%}</br>
-            </div>
-
-            <!-- PROMPTS -->
-            <div class="section" id="prompts">
-                <h2> Prompts </h2>
-
-                <div class="prompt" id="artists-prompt">
-                    <h3> Artists you both like are... </h3>
-                    {{s_artists}}
-                </div>
-
-                <div class="prompt" id="genres-prompt">
-                    <h3> Genres you both like are... </h3>
-                    {{s_genres}}
-                </div>
-            </div>
-
-            <!-- BUBBLES -->
-            <div class="section" id="bubble1">
-                <h2> Favorite Artists </h2>
-                {%for i in range(0, len_f_artists)%}
-                    <li>{{f_artists[i]}}</li>
-                {%endfor%}</br>
-            </div>
-
-            <div class="section" id="bubble2">
-                <h2> Favorite Genres </h2>
-                {%for i in range(0, len_f_genres)%}
-                    <li>{{f_genres[i]}}</li>
-                {%endfor%}</br>
-            </div>
+            {{out}}
+            
                 
                 <input type="submit" value="super like">
                 <input type="submit" value="like">
