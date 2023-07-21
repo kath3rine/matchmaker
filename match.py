@@ -1,5 +1,4 @@
-from helpers import get_image, get_artist_info, get_data, get_genres, create_df, find_compatibility, find_top, find_shared, find_features, recommend_artists, recommend_tracks, combine_df
-
+from helpers import get_image, get_artist_info, get_data, get_genres, create_df, find_compatibility, find_top, find_shared, find_features, recommend_artists, recommend_tracks, recommend_track_names, recommend_track_urls, combine_df
 
 def matchmaker(pid1y, pid1x, pid2, uid):
     # PARAMS 
@@ -17,7 +16,8 @@ def matchmaker(pid1y, pid1x, pid2, uid):
     var_list = ['pfp', 'name', 'compatibility', # header
                 'sim_features', # prompts
                 's_artists', 's_genres', 'f_artists', 'f_genres', # bubbles
-                'rec_tracks', 'rec_artists', # about
+                'rec_tracks_names', 'rec_tracks_urls'
+                'rec_artists_names', 'rec_artists_urls' # about
             ]
 
     # keys = variables, values = value for html page
@@ -51,7 +51,7 @@ def matchmaker(pid1y, pid1x, pid2, uid):
     r['compatibility'] = find_compatibility(df1[REDUCED_FEATURES], df1['likes'], df2[REDUCED_FEATURES], df2['likes']) * 100
 
     # PROMPTS 
-    r['sim_features'] = find_features(df1y, df2, VERY_REDUCED_FEATURES)
+    r['sim_features'] = str(find_features(df1y, df2, VERY_REDUCED_FEATURES))[1 : -1]
 
     # BUBBLES (shared + favs)
     r['s_artists'] = get_artist_info(a, 'name')
@@ -60,17 +60,26 @@ def matchmaker(pid1y, pid1x, pid2, uid):
     r['f_genres'] = [*set(g2)][ : 3]
 
     # ABOUT (RECS)
+    # rec_tracks are jsons of data, not lists
     if len(a) != 0: # seed = shared artists
-        r['rec_tracks'] = recommend_tracks(a, 'artists')
-        r['rec_artists'] = recommend_artists(a)
+        rec_tracks = recommend_tracks(a, 'artists')
+        r['rec_artists_names'] = recommend_artists(a, 0)
+        r['rec_artists_urls'] = recommend_artists(a, 1)
     else: # no shared artists
         temp = [top_a1[0], top_a2[0], top_a2[1]] # top 2 artists per person
-        r['rec_artists'] = recommend_artists(temp)
+        r['rec_artists_names'] = recommend_artists(temp, 0)
+        r['rec_artists_urls'] = recommend_artists(temp, 1)
         if len(g) != 0: # seed = shared genres
-            r['rec_tracks'] = recommend_tracks(g, 'genres')
+            rec_tracks = recommend_tracks(g, 'genres')
         else: # seed = top 2 artists per person
-            r['rec_tracks'] = recommend_tracks(temp, 'artists')
+            rec_tracks = recommend_tracks(temp, 'artists')
+
+    r['rec_tracks_names'] = recommend_track_names(rec_tracks)
+    r['rec_tracks_urls'] = recommend_track_urls(rec_tracks)
+
     return r
+
+
 
 
 

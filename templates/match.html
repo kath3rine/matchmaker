@@ -9,8 +9,63 @@
 <body>
     <div class="container" id="match-container"> 
         <form action="/like" method="POST">
-            {{out}}
             
+            <!-- HEADER -->
+            <img src={{pfp}}> </br>
+            <span>
+                <h1 id="match-name", name="match-name", value="match-name"> {{name}} </h1>
+                <h3> {{compatibility}}% compatible </h3>
+                <p>learn more</p>
+                <input type="text" value={{name}} id="name-here" name="name-here" placeholder="test">
+            </span>
+
+            <!-- ABOUT -->
+            <div class="section" id="about">
+                <h2> Recommended songs and artists:</h2>
+                {%for i in range(0, 4)%}
+                    <li>{{rec_artists_names[i]}} : {{rec_artists_urls[i]}}</li>
+                {%endfor%}</br>
+
+                {%for i in range(0, 4)%}
+                    <li>{{rec_tracks_names[i]}} : {{rec_tracks_urls[i]}}</li>
+                {%endfor%}</br>
+            </div>
+
+            <!-- PROMPTS -->
+            <div class="section" id="prompts">
+                <h2> Prompts </h2>
+
+                <div class="prompt" id="artists-prompt">
+                    <h3> "We both like songs with similar levels of... </h3>
+                    {{sim_features}}
+                </div>
+
+            </div>
+
+            <!-- BUBBLES -->
+            <div class="section" id="bubble1">
+                <h2> Artists</h2>
+                {%for sa in s_artists%}
+                    <li><strong>{{sa}}</strong></li>
+                {%endfor%}
+                {%for fa in f_artists%}
+                    {% if fa not in s_artists %}
+                    <li>{{fa}}</li>
+                    {% endif %}
+                {%endfor%}</br>
+            </div>
+
+            <div class="section" id="bubble2">
+                <h2> Genres</h2>
+                {%for sg in s_genres%}
+                    <li><strong>{{sg}}</strong></li>
+                {%endfor%}
+                {%for fg in f_genres%}
+                    {% if fg not in s_genres %}
+                    <li>{{fg}}</li>
+                    {% endif %}
+                {%endfor%}</br>
+            </div>
                 
                 <input type="submit" value="super like">
                 <input type="submit" value="like">

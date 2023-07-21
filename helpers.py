@@ -132,33 +132,48 @@ def find_features(df1, df2, FEATURES):
 
 def recommend_tracks(ids, mode):
 	# PARAMS ids: list of ids (artist or genre), mode: artist or genre
-	# RETURNS: list of 5 songs, format "[title] by [artist]"
+	# RETURNS: json of three songs
 
 	seed = '='
 	for i in ids:
 		seed += (i + '%2C') # add item + comma
 	seed = seed[: -3] # remove the last comma'
 
-	data = requests.get(BASE_URL + 'recommendations?limit=3&seed_' + mode + seed, headers=headers)
-	data = data.json()
+	data = requests.get(BASE_URL + 'recommendations?limit=4&seed_' + mode + seed, headers=headers)
+	return data.json()
 
+def recommend_track_names(data):
+	# PARAMS json of 3 songs
+	# RETURNS list of track names
 	r = []
 	for track in data['tracks']:
 		temp = track['name'] + " by " + track['artists'][0]['name']
 		r.append(temp)
-
 	return r
 
-def recommend_artists(artist_ids):
-	# PARAMS artist_ids: list of artist ids
-	# RETURNS related artists (1 per artist in param)
+def recommend_track_urls(data):
+	# PARAMS json of 3 songs
+	# RETURNS list of track urls
+	r = []
+	for track in data['tracks']:
+		temp = track['external_urls']
+		r.append(temp['spotify'])
+	return r
+
+def recommend_artists(artist_ids, flag):
+	# PARAMS artist_ids: list of artist ids, flag: 0 = name, 1 = url
+	# RETURNS related artist keys (1 per artist in param)
 
 	r = []
 	for artist in artist_ids:
 		data = requests.get(BASE_URL + 'artists/' + artist + '/related-artists', headers=headers)
 		data = data.json()
 		a = data['artists'][0]
-		r.append(a['name'])
+		if flag == 0: # artist names
+			r.append(a['name'])
+		else: # artist urls
+			b = a['external_urls']
+			r.append(b['spotify'])
 	return [*set(r)]
 
 
@@ -199,16 +214,13 @@ def combine_df(df_lst):
 
 def find_compatibility(X_train, y_train, X_test, y_test):
 	# PARAMS
-	# X_train: audio features of user1's songs
-	# y_train: whether user1 (dis)likes a song
-	# X_test: audio features of user2's liked songs
-	# y_test: whether user2 will like the song
+	# X_train: audio features of user1's songs, y_train: whether user1 (dis)likes a song
+	# X_test: audio features of user2's liked songs, y_test: whether user2 will like the song
 
 	# RETURNS compatbility percentage, i.e. DTC's accuracy in predicting whether user 2 will like a song
 
     dtc = DecisionTreeClassifier()
     dtc.fit(X_train, y_train)
     return dtc.score(X_test, y_test)
-
 
 
