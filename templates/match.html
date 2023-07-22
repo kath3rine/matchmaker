@@ -8,8 +8,16 @@
 </head>
 <body>
     <div class="container" id="match-container"> 
+        <!-- TOP -->
+        <form action="/" method="POST">
+            <input type="submit" value="Homepage">
+        </form>
+
+        <form action="/saved" method="POST">
+            <input type="submit" value="View Matches">
+        </form>
+
         <form action="/like" method="POST">
-            
             <!-- HEADER -->
             <img src={{pfp}}> </br>
             <span>
@@ -77,14 +85,7 @@
 
     </div>
 
-        <!-- FOOTER -->
-        <form action="/" method="POST">
-            <input type="submit" value="Homepage">
-        </form>
-
-        <form action="/saved" method="POST">
-            <input type="submit" value="View Matches">
-        </form>
+        
     
 </body>
 </html>
