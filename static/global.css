@@ -21,6 +21,7 @@
 
 body {
     background-image: linear-gradient(to top right, var(--pink) , var(--orange));
+    height: 100vh;
 }
 
 * p, * a {
@@ -30,8 +31,9 @@ body {
 .container {
     background-color: white;
     border-radius: 20px;
-    margin: 5% 5% 10% 5%;
-    height: 90vh;
+    margin: 2% 5% 2% 5%;
+    height: 85vh;
+    padding-bottom: 5%;
 }
 
 .buttons {

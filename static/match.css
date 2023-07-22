@@ -1,7 +1,7 @@
 @import "global.css";
 
 .section {
-    padding: 3%;
+    padding: 2% 5% 2% 5%;
     border-bottom: var(--lt-grey) solid 1px;
 }
 
@@ -66,3 +66,34 @@ a:hover {
     color: var(--scarlet);
 }
 
+#bubble2 {
+    border-bottom: white;
+}
+
+/* BUTTONS */
+.buttons {
+    justify-content: space-around;
+    align-items: center;
+    width: 25vw;
+}
+
+#top {
+    height: 3vh;
+    column-count: 2;
+}
+
+#top input {
+    margin: auto;
+}
+
+#swipe {
+    column-count: 3;
+}
+
+#swipe input {
+    height: 5vh;
+    width: 5vh;
+    border-radius: 50%;
+    padding: 5%;
+    background-color: white;
+}
