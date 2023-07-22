@@ -1,0 +1,68 @@
+@import "global.css";
+
+.section {
+    padding: 3%;
+    border-bottom: var(--lt-grey) solid 1px;
+}
+
+/* HEADER */
+#name {
+    font-weight: 800;
+}
+
+#pfp {
+    width: 100%;
+    height: 25%;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+#compatibility {
+    font-weight: 400;
+    font-size: 1.75rem;
+    padding: 0.75%;
+}
+
+#name-here {
+    visibility: hidden;
+}
+
+/* RECS */
+a:hover {
+    color: var(--scarlet);
+}
+
+/* PROMPTS */
+.prompt {
+    border: var(--lt-grey) solid 1px;
+    border-radius: 10px;
+    padding: 0% 3% 1% 3%;
+}
+
+.prompt h3 {
+    color: var(--grey);
+    font-size: 1rem;
+}
+
+.quote {
+    color: var(--pink);
+    font-size: 2rem;
+}
+
+/* BUBBLES */
+
+.bubble, .bubble-red {
+    border-radius: 20px;
+    padding: 1.5%;
+    margin: 1%;
+}
+
+.bubble {
+    border: var(--lt-grey) solid 2px;
+}
+
+.bubble-red {
+    border: var(--scarlet) solid 2px;
+    color: var(--scarlet);
+}
+

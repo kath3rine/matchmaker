@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;800&display=swap');
+
+:root {
+    --pink: #FF0072;
+    --scarlet: #FF5864;
+    --orange: #FF7F47;
+    --dk-grey: #333333;
+    --grey: #666666;
+    --lt-grey: #aaaaaa;
+}
+
+* {
+    font-family: "Gothic A1", sans-serif;
+    
+}
+
+* h1, * h3 {
+    font-weight: 800;
+    color: var(--dk-grey);
+}
+
+body {
+    background-image: linear-gradient(to top right, var(--pink) , var(--orange));
+}
+
+* p, * a {
+    color: var(--grey);
+}
+
+.container {
+    background-color: white;
+    border-radius: 20px;
+    margin: 5% 5% 10% 5%;
+    height: 90vh;
+}
+
+.buttons {
+    align-items: center;
+    width: 50%;
+    margin: auto;
+    border: green dotted 1px;
+}
+
+.button {
+    margin: auto;
+}
