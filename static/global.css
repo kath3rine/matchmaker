@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
 
 :root {
     --pink: #FF0072;
@@ -6,22 +6,25 @@
     --orange: #FF7F47;
     --dk-grey: #333333;
     --grey: #666666;
-    --lt-grey: #aaaaaa;
+    --lt-grey: #c6c6c6;
+
+    --dislike-col: #e30053;
+    --superlike-col: #20b0f7;
+    --like-col: #00eb8d;
 }
 
 * {
-    font-family: "Gothic A1", sans-serif;
+    font-family: "Open Sans", sans-serif;
     
 }
 
-* h1, * h3 {
-    font-weight: 800;
+* h1, * h2, * h3 {
     color: var(--dk-grey);
 }
 
+
 body {
     background-image: linear-gradient(to top right, var(--pink) , var(--orange));
-    height: 100vh;
 }
 
 * p, * a {
@@ -31,18 +34,42 @@ body {
 .container {
     background-color: white;
     border-radius: 20px;
-    margin: 2% 5% 2% 5%;
-    height: 85vh;
+    margin: auto;
+    position: relative;
+    height: 85%;
+    width: 80%;
     padding-bottom: 5%;
 }
 
 .buttons {
     align-items: center;
     width: 50%;
+    display: flex;
+    justify-content: space-around;
     margin: auto;
-    border: green dotted 1px;
+    padding: 1%;
 }
 
 .button {
-    margin: auto;
+    background-color: white;
+}
+
+#top {
+    position: fixed;
+    z-index: 10;
+    top: 2vh;
+    left: 10vw;
+    right: 10vw;
+}
+
+#top input {
+    background-color: white;
+    color: var(--grey);
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 3px 8px 3px 8px;
+}
+
+#top input:hover {
+    color: var(--scarlet);
 }

@@ -5,38 +5,67 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tinderfy</title>
+    <link rel="stylesheet" href="../static/global.css" />
+    <link rel="stylesheet" href="../static/match.css" />
 </head>
 <body>
-    <div class="container" id="match-container"> 
-        <!-- TOP -->
+
+    <!-- TOP -->
+    <div class="buttons" id="top">
         <form action="/" method="POST">
             <input type="submit" value="Homepage">
         </form>
-
+    
         <form action="/saved" method="POST">
             <input type="submit" value="View Matches">
         </form>
+    </div>
+        
+    <!-- PROFILE -->
+    <div class="container" id="match-container"> 
+    <form action="/like" method="POST"></form>
+        
+         <!-- HEADER -->
+            <img id="pfp" src='../test_templates/test_image.png'> <!-- replace src with {{pfp}}--></br>
+            <div id="header">
+                <div id="match-name", name="match-name", value="match-name"> 
+                    <span id="name"> {{name}}</span>
+                    <span id="compatibility">{{compatibility}}% </span>  
+                </div>
+            <span id="subheading">
+                <span >
+                    <a id="gh-link" href="https://github.com/kath3rine/tinderfy">learn more</a>
+                </span>
 
-        <form action="/like" method="POST">
-            <!-- HEADER -->
-            <img src={{pfp}}> </br>
-            <span>
-                <h1 id="match-name", name="match-name", value="match-name"> {{name}} </h1>
-                <h3> {{compatibility}}% compatible </h3>
-                <a href="https://github.com/kath3rine/tinderfy">learn more</a>
-                <input type="text" value={{name}} id="name-here" name="name-here" placeholder="test">
+                <!-- to save username + pfp link for match page-->
+                <span><input type="text" value={{name}} id="name-here" name="name-here" placeholder="test"></span>
+                <span><input type="text" value={{pfp}} id="pfp-here" name="pfp-here" placeholder="test"></span>
             </span>
+                
+            </div>
 
             <!-- ABOUT -->
             <div class="section" id="about">
-                <h2> Recommended songs and artists:</h2>
+                <h2> Recommended artists and songs:</h2>
+                <!--
                 {%for i in range(0, 4)%}
-                    <li>{{rec_artists_names[i]}} : {{rec_artists_urls[i]}}</li>
+                    <a href={{rec_artists_urls[i]}}>{{rec_artists_names[i]}}</a>
                 {%endfor%}</br>
 
                 {%for i in range(0, 4)%}
-                    <li>{{rec_tracks_names[i]}} : {{rec_tracks_urls[i]}}</li>
+                    <a href={{rec_tracks_urls[i]}}>{{rec_tracks_names[i]}}</a>
                 {%endfor%}</br>
+                -->
+
+                <!-- TEST DATA -->
+                <a href=" https://open.spotify.com/artist/07D1Bjaof0NFlU32KXiqUP" class="rec-artist">- artist rec here</a>
+                <a href=" https://open.spotify.com/artist/07D1Bjaof0NFlU32KXiqUP" class="rec-artist">- artist rec here</a>
+                <a href=" https://open.spotify.com/artist/07D1Bjaof0NFlU32KXiqUP" class="rec-artist">- artist rec here</a>
+            </br>
+                <a href=" https://open.spotify.com/artist/07D1Bjaof0NFlU32KXiqUP" class="rec-track">- song rec by artist</a></br>
+                <a href=" https://open.spotify.com/artist/07D1Bjaof0NFlU32KXiqUP" class="rec-track">- song rec by another artist</a></br>
+                <a href=" https://open.spotify.com/artist/07D1Bjaof0NFlU32KXiqUP" class="rec-track">- another song rec by artist</a></br>
+                <!-- END TEST DATA -->
             </div>
 
             <!-- PROMPTS -->
@@ -44,45 +73,74 @@
                 <h2> Prompts </h2>
 
                 <div class="prompt" id="artists-prompt">
-                    <h3> "We both like songs with similar levels of... </h3>
-                    {{sim_features}}
+                    <h3> <span class="quote">"</span>  We both like songs with similar levels of... </h3>
+
+                    <p>{{sim_features}}</p>
                 </div>
 
             </div>
 
             <!-- BUBBLES -->
             <div class="section" id="bubble1">
-                <h2> Artists</h2>
-                {%for sa in s_artists%}
-                    <li><strong>{{sa}}</strong></li>
+                <h2><strong> Artists</strong></h2>
+                
+                <!--
+                    {%for sa in s_artists%}
+                    <span class='bubble-red'>{{sa}}</span>
                 {%endfor%}
                 {%for fa in f_artists%}
                     {% if fa not in s_artists %}
-                    <li>{{fa}}</li>
+                    <span class="bubble">{{fa}}</span>
                     {% endif %}
                 {%endfor%}</br>
+                -->
+
+                <!-- TEST DATA -->
+                <p class="bubbles">
+                    <span class="bubble-red">artist here</span>
+                    <span class="bubble-red">artist here</span>
+                    <span class="bubble"> another artist here</span>
+                </p>
+                <!-- END TEST DATA -->
+
             </div>
 
             <div class="section" id="bubble2">
                 <h2> Genres</h2>
-                {%for sg in s_genres%}
-                    <li><strong>{{sg}}</strong></li>
+                <!--
+                    {%for sg in s_genres%}
+                    <span class="bubble-red">{{sg}}</li>
                 {%endfor%}
                 {%for fg in f_genres%}
                     {% if fg not in s_genres %}
-                    <li>{{fg}}</li>
+                    <span class="bubble">{{fg}}</span>
                     {% endif %}
                 {%endfor%}</br>
-            </div>
-                
-                <input type="submit" value="super like">
-                <input type="submit" value="like">
-        </form>
-            
-        <form action="/" method="POST">
-            <input type="submit" value="dislike">
-        </form>
+                -->
 
+                <!-- TEST DATA -->
+                <p class="bubbles">
+                    <a class="bubble-red">genre here</a>
+                    <a class="bubble"> another genre here</a>
+                    <a class="bubble"> another genre here</a>
+                </p>
+                <!-- END TEST DATA -->
+                
+            </div>
+                <div class="buttons" id="swipe">
+                    <span>
+                        <input class='button' id="like" type="submit" value="♥︎">
+                    </span>
+
+                    <span><input class='button' id="superlike" type="submit" value="★"></span>
+            </form>
+                
+                <form action="/" method="POST">
+                    <input class="button" id="dislike" type="submit" value="X">
+                </form>
+
+                </div>
+            
     </div>
 
         
