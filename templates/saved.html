@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/global.css" />
+    <link rel="stylesheet" href="../static/saved.css" />
     <title>Tinderfy</title>
 </head>
 <body>
     <h1> Your Matches </h1>
-        {% for i in range (0, len(matches)) %}
-        <p>{{matches[i]}}: {{matches_pfp[i]}}/p>
+        {% for i in range(0, len_matches) %}
+        <p>{{matches[i]}}</p>
+        <img src="{{matches_pfp[i]}}"/>
         {%endfor%}
 </body>
 </html>

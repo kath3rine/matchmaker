@@ -75,11 +75,8 @@ def get_genres(artist_ids):
 	r = []
 	for i in artist_ids:
 		data = get_data(i, 'artists')
-		genre = data['genres'][0]
-		if genre is None:
-			continue
-		else: 
-			r.append(genre)
+		if len(data['genres']) > 0:
+			r.append(data['genres'][0])
 	return r
 
 
@@ -219,7 +216,7 @@ def find_compatibility(X_train, y_train, X_test, y_test):
 
 	# RETURNS compatbility percentage, i.e. DTC's accuracy in predicting whether user 2 will like a song
 
-    dtc = DecisionTreeClassifier()
+    dtc = DecisionTreeClassifier(criterion='entropy')
     dtc.fit(X_train, y_train)
     return dtc.score(X_test, y_test)
 

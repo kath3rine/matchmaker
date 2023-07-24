@@ -28,25 +28,29 @@ def matchmaker(pid1y, pid1x, pid2, uid):
     pid2 = pid2[34 : -20] 
 
     # create dataframes 
-    df1y, df1x = create_df(pid1y, 1), create_df(pid1x, 0) # user1 likes, user1 dislikes
+    df1y = create_df(pid1y, 1) # user1 likes
+    df1x = create_df(pid1x, 0) # user1 dislikes
     df1 = combine_df([df1y, df1x]) # all user1
     df2 = create_df(pid2, 1) # user2
 
     user_data = get_data(uid, 'users')
 
     # artists, genres, features
-    a1, a2 = df1y['artist_ids'].tolist(), df2['artist_ids'].tolist() # artists per person, w dupes (ids)
+    a1 = df1y['artist_ids'].tolist() # artists per person, w dupes (ids)
+    a2 = df2['artist_ids'].tolist() 
     top_a1 = find_top(a1, 1) # user1's top 2 artists (ids)
     top_a2 = find_top(a2, 3) # user2's top 3 artists (ids)
     a = find_shared([a1, a2])[ : 5] # top 5 shared artists (ids)
 
-    g1, g2 = get_genres(a1), get_genres(a2) # genres w/ dupes (strs)
+    g1 = get_genres(a1)  # genres w/ dupes (strs)
+    g2 = get_genres(a2)
     g = find_shared([g1, g2])[ : 5] # top 5 shared genres (strs)
 
     ###### PROFILE PAGE ######
 
     # HEADER
-    r['pfp'] = get_image(user_data)
+    # r['pfp'] = get_image(user_data)
+    r['pfp'] = get_image(get_data(pid2, 'playlists'))
     r['name'] = user_data['display_name']
     r['compatibility'] = find_compatibility(df1[REDUCED_FEATURES], df1['likes'], df2[REDUCED_FEATURES], df2['likes']) * 100
 

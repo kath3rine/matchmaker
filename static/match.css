@@ -7,7 +7,6 @@
 
 .section h2 {
     font-size: 2vh;
-    line-height: 1vh;
 }
 
 a, p {
@@ -27,7 +26,7 @@ a, p {
 #header input {
     width: 10px;
     visibility: hidden;
-}
+} 
 
 #name {
     font-weight: 800;
@@ -41,6 +40,7 @@ a, p {
     height: 25vh;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+    object-fit: cover;
 }
 
 #compatibility {

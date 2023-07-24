@@ -23,19 +23,23 @@
         
     <!-- PROFILE -->
     <div class="container" id="match-container"> 
-    <form action="/like" method="POST"></form>
+    <form action="/like" method="POST">
         
          <!-- HEADER -->
-            <img id="pfp" src='../ignore/test_image.png'> <!-- replace src with {{pfp}}--></br>
+            <img id="pfp" src={{pfp}}></br>
             <div id="header">
                 <div id="match-name", name="match-name", value="match-name"> 
                     <span id="name"> {{name}}</span>
                     <span id="compatibility">{{compatibility}}% </span>  
                 </div>
             <span id="subheading">
+
+                <!-- LINK TO GITHUB
                 <span >
                     <a id="gh-link" href="https://github.com/kath3rine/tinderfy">learn more</a>
                 </span>
+                -->
+                
 
                 <!-- to save username + pfp link for match page-->
                 <span><input type="text" value={{name}} id="name-here" name="name-here" placeholder="test"></span>
@@ -47,17 +51,17 @@
             <!-- ABOUT -->
             <div class="section" id="about">
                 <h2> Recommended artists and songs:</h2>
-                <!--
+                
                 {%for i in range(0, 4)%}
-                    <a href={{rec_artists_urls[i]}}>{{rec_artists_names[i]}}</a>
-                {%endfor%}</br>
+                    <a href={{rec_artists_urls[i]}}>{{rec_artists_names[i]}}</a></br>
+                {%endfor%}
 
                 {%for i in range(0, 4)%}
-                    <a href={{rec_tracks_urls[i]}}>{{rec_tracks_names[i]}}</a>
-                {%endfor%}</br>
-                -->
+                    <a href={{rec_tracks_urls[i]}}>{{rec_tracks_names[i]}}</a></br>
+                {%endfor%}
+                
 
-                <!-- TEST DATA -->
+                <!-- TEST DATA 
                 <a href=" https://open.spotify.com/artist/07D1Bjaof0NFlU32KXiqUP" class="rec-artist">- artist rec here</a></br>
                 <a href=" https://open.spotify.com/artist/07D1Bjaof0NFlU32KXiqUP" class="rec-artist">- artist rec here</a></br>
                 <a href=" https://open.spotify.com/artist/07D1Bjaof0NFlU32KXiqUP" class="rec-artist">- artist rec here</a>
@@ -65,10 +69,11 @@
                 <a href=" https://open.spotify.com/artist/07D1Bjaof0NFlU32KXiqUP" class="rec-track">- song rec by artist</a></br>
                 <a href=" https://open.spotify.com/artist/07D1Bjaof0NFlU32KXiqUP" class="rec-track">- song rec by another artist</a></br>
                 <a href=" https://open.spotify.com/artist/07D1Bjaof0NFlU32KXiqUP" class="rec-track">- another song rec by artist</a></br>
-                <!-- END TEST DATA -->
+                END TEST DATA -->
             </div>
 
             <!-- PROMPTS -->
+            {% if sim_features != "" %}
             <div class="section" id="prompts">
                 <h2> Prompts </h2>
 
@@ -77,54 +82,58 @@
 
                     <p>{{sim_features}}</p>
                 </div>
-
             </div>
+            {% endif %}
 
             <!-- BUBBLES -->
             <div class="section" id="bubble1">
                 <h2><strong> Artists</strong></h2>
                 
-                <!--
+                <p class="bubbles">
                     {%for sa in s_artists%}
-                    <span class='bubble-red'>{{sa}}</span>
-                {%endfor%}
-                {%for fa in f_artists%}
-                    {% if fa not in s_artists %}
-                    <span class="bubble">{{fa}}</span>
-                    {% endif %}
-                {%endfor%}</br>
-                -->
+                        <span class='bubble-red'>{{sa}}</span>
+                    {%endfor%}
+                    {%for fa in f_artists%}
+                        {% if fa not in s_artists %}
+                        <span class="bubble">{{fa}}</span>
+                        {% endif %}
+                    {%endfor%}</br>
+                </p>
+                    
+                
 
-                <!-- TEST DATA -->
+                <!-- TEST DATA 
                 <p class="bubbles">
                     <span class="bubble-red">artist here</span>
                     <span class="bubble-red">artist here</span>
                     <span class="bubble"> another artist here</span>
                 </p>
-                <!-- END TEST DATA -->
+                 END TEST DATA -->
 
             </div>
 
             <div class="section" id="bubble2">
                 <h2> Genres</h2>
-                <!--
+                <p class="bubbles">
                     {%for sg in s_genres%}
-                    <span class="bubble-red">{{sg}}</li>
-                {%endfor%}
-                {%for fg in f_genres%}
-                    {% if fg not in s_genres %}
-                    <span class="bubble">{{fg}}</span>
-                    {% endif %}
-                {%endfor%}</br>
-                -->
+                        <span class="bubble-red">{{sg}}</span>
+                    {%endfor%}
+                    
+                    {%for fg in f_genres%}
+                        {% if fg not in s_genres %}
+                        <span class="bubble">{{fg}}</span>
+                        {% endif %}
+                    {%endfor%}</br>
+                </p>
+                
 
-                <!-- TEST DATA -->
+                <!-- TEST DATA 
                 <p class="bubbles">
                     <a class="bubble-red">genre here</a>
                     <a class="bubble"> another genre here</a>
                     <a class="bubble"> another genre here</a>
                 </p>
-                <!-- END TEST DATA -->
+                 END TEST DATA -->
                 
             </div>
                 <div class="buttons" id="swipe">

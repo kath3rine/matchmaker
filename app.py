@@ -49,7 +49,7 @@ def like():
 # VIEW YOUR MATCHES
 @app.route('/saved', methods=['GET', 'POST'])
 def saved():
-  return render_template('saved.html', out=matches)
+  return render_template('saved.html', matches=matches, matches_pfp=matches_pfp, len_matches=len(matches))
 
 if __name__ == '__main__':
     app.run(debug=True)
