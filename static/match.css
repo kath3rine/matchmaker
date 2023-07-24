@@ -6,13 +6,13 @@
 }
 
 .section h2 {
-    font-size: 1rem;
-    line-height: 1;
+    font-size: 2vh;
+    line-height: 1vh;
 }
 
 a, p {
-    font-size: 0.75rem;
-    line-height: 0.5;
+    font-size: 1.25vh;
+    line-height: 0.25vh;
 }
 
 #gh-link:hover, #about a:hover {
@@ -31,7 +31,7 @@ a, p {
 
 #name {
     font-weight: 800;
-    font-size: 1.5rem;
+    font-size: 2.5vh;
     margin-top: 50px;
     line-height: 0.25;
 }
@@ -45,7 +45,7 @@ a, p {
 
 #compatibility {
     font-weight: 400;
-    font-size: 1rem;
+    font-size: 2vh;
     padding: 0.75%;
 }
 
@@ -65,12 +65,12 @@ a, p {
 
 .prompt h3 {
     color: var(--grey);
-    font-size: 0.8rem;
+    font-size: 1.5vh;
 }
 
 .quote {
     color: var(--pink);
-    font-size: 1rem;
+    font-size: 2vh;
 }
 
 /* BUBBLES */
@@ -78,11 +78,13 @@ a, p {
 .bubbles {
     margin-top: 7%;
     margin-bottom: 5%;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .bubble, .bubble-red {
     border-radius: 20px;
-    padding: 1.5% 2% 1.5% 2%;
+    padding: 3%;
     margin: 1%;
 }
 

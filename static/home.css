@@ -1,5 +1,9 @@
 /* HEADER */
 
+body {
+    height: 100vh;
+}
+
 #logo {
     margin: 10% 10% 2% 10%;
     width: 80%;
@@ -25,14 +29,31 @@
     display: flex;
 }
 
-.input-box {
-    margin-left: 5%;
+label {
+    color: white;
+    padding: 1% 2% 1% 2%;
+    border-radius: 5px;;
+}
+
+input {
+    border-radius: 5px;
+    border: var(--lt-grey) solid 2px;
+    padding: 1%;
     flex: 2;
+    margin-left: 3%;
+}
+
+#label1, #label2 {
+    background-color: var(--orange);
+}
+
+#label3, #label4 {
+    background-color: var(--scarlet);
 }
 
 /* BOTTOM */
 #match-button {
-    background-color: var(--scarlet);
+    background-color: var(--pink);
     color: white;
     margin: 5% 40% 10% 40%;
     width: 20%;

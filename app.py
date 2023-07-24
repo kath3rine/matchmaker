@@ -4,6 +4,7 @@ from match import matchmaker
 app = Flask(__name__)
 
 matches = [] # list of profiles user1 has "matched" with thus far
+matches_pfp = [] # list of matches' pfp
 
 # HOMEPAGE (input data/"disliked' redirect")
 @app.route('/', methods=['GET', 'POST'])
@@ -37,9 +38,12 @@ def match():
 # LIKE A MATCH (add to queue)
 @app.route('/like', methods=['GET', 'POST'])
 def like():
-  x = request.form['name-here']
+  match_name = request.form['name-here']
+  match_pfp = request.form['pfp-here']
   global matches
-  matches.append(x)
+  matches.append(match_name)
+  global matches_pfp
+  matches_pfp.append(match_pfp)
   return render_template('index.html')
 
 # VIEW YOUR MATCHES
