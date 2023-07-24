@@ -9,24 +9,34 @@
     <title>Tinderfy</title>
 </head>
 <body>
+    <form class="buttons" id="top" action="/saved" method="POST">
+        <input class="button" type="submit" value="View Matches">
+    </form>
+
     <form action="/match" method="POST">
-        <label for="input1">User 1 likes:</label>
-        <input type="text" id="input1" name="input1" placeholder="playlist url">
-
-        <label for="input2">User 1 dislikes:</label>
-        <input type="text" id="input2" name="input2" placeholder="playlist url">
-
-        <label for="input3">User 2:</label>
-        <input type="text" id="input3" name="input3" placeholder="playlist url">
-
-        <label for="input4">User 2 name:</label>
-        <input type="text" id="input4" name="input4" placeholder="username"> 
-
-        <input type="submit" value="Match">
+        <img id="logo" src="../test_templates/test_image.png">
+        <div id="input-section">
+            <div class="input">
+                <label for="input1">Songs you like:</label>
+                <input type="text" class="input-box" id="input1" name="input1" placeholder="playlist url">
+            </div>
+            <div class="input">
+                <label for="input2">Songs you dislike:</label>
+                <input type="text" class="input-box" id="input2" name="input2" placeholder="playlist url">
+            </div>
+            <div class="input">
+                <label for="input3">Songs they like:</label>
+                <input type="text" class="input-box" id="input3" name="input3" placeholder="playlist url">
+            </div>        
+            <div class="input">
+                <label for="input4">Their username:</label>
+                <input type="text" class="input-box" id="input4" name="input4" placeholder="username"> 
+            </div>
+                    
+        
+        <input class="button" id="match-button" type="submit" value="Match">
     </form>
     
-    <form action="/saved" method="POST">
-        <input type="submit" value="View Matches">
-    </form>
+    
 </body>
 </html>
