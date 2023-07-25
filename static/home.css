@@ -90,5 +90,13 @@ body {
 }
 
 a {
-    color: var(--grey)
+    color: var(--grey);
+}
+
+a:hover {
+    color: var(--scarlet);
+}
+
+#footnote {
+    color: var(--lt-grey);
 }

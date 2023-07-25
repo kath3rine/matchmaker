@@ -1,4 +1,5 @@
 secret.py 
 ignore 
 __pycache__
-test_templates
+static/test_image.png
+test.py

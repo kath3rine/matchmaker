@@ -42,7 +42,7 @@ def match():
     rec_tracks_names = m['rec_tracks_names'], 
     rec_tracks_urls = m['rec_tracks_urls'],
     rec_artists_names = m['rec_artists_names'], 
-    rec_artists_urls = m['rec_artists_urls'], pid1x=pid1x)
+    rec_artists_urls = m['rec_artists_urls'], user_pfp=m['user_pfp'])
 
 # LIKE A MATCH (add to queue)
 @app.route('/like', methods=['GET', 'POST'])

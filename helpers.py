@@ -127,51 +127,74 @@ def find_features(df1, df2, FEATURES):
 
 ########## RECOMMEND ("about") ##########
 
+def remove_dict_dupes(d):
+	# PARAMS raw dict
+	# RETURNS dict w/ duplicate key-value pairs removed
+
+    r = dict()
+    visited = []
+    for k, v in d.items():
+        if v not in visited:
+            visited.append(v)
+            r[k] = v
+	    
+    return r
+
+def contains_space(x):
+	# PARAM list of strs
+	# RETURNS whether any element in that list has a space in it
+
+	for i in x:
+		if " " in i:
+			return True
+	return False
+
 def recommend_tracks(ids, mode):
 	# PARAMS ids: list of ids (artist or genre), mode: artist or genre
-	# RETURNS: json of three songs
+	# RETURNS dict: keys = song names ([title] by [artist]), values = their spotify url
 
+	# create seed for recommendation endpoint
 	seed = '='
 	for i in ids:
 		seed += (i + '%2C') # add item + comma
 	seed = seed[: -3] # remove the last comma'
 
+	# json file for 3 tracks
 	data = requests.get(BASE_URL + 'recommendations?limit=4&seed_' + mode + seed, headers=headers)
-	return data.json()
+	data= data.json() 
 
-def recommend_track_names(data):
-	# PARAMS json of 3 songs
-	# RETURNS list of track names
-	r = []
+	# create a dict using the  names and urls
+	names = []
+	urls = []
 	for track in data['tracks']:
-		temp = track['name'] + " by " + track['artists'][0]['name']
-		r.append(temp)
-	return r
-
-def recommend_track_urls(data):
-	# PARAMS json of 3 songs
-	# RETURNS list of track urls
-	r = []
-	for track in data['tracks']:
+		name = track['name'] + " by " + track['artists'][0]['name']
+		names.append(name)
 		temp = track['external_urls']
-		r.append(temp['spotify'])
+		urls.append(temp['spotify'])
+	
+	r = dict(zip(names, urls))
 	return r
 
-def recommend_artists(artist_ids, flag):
-	# PARAMS artist_ids: list of artist ids, flag: 0 = name, 1 = url
-	# RETURNS related artist keys (1 per artist in param)
+def recommend_artists(artist_ids):
+	# PARAMS list of artist ids
+	# RETURNS dict; key = artist names, value = their spotify url
 
-	r = []
+	names = []
+	urls = []
+
 	for artist in artist_ids:
 		data = requests.get(BASE_URL + 'artists/' + artist + '/related-artists', headers=headers)
 		data = data.json()
-		a = data['artists'][0]
-		if flag == 0: # artist names
-			r.append(a['name'])
-		else: # artist urls
-			b = a['external_urls']
-			r.append(b['spotify'])
-	return [*set(r)]
+
+		a = data['artists'][0] 
+		names.append(a['name'])
+		b = a['external_urls']
+		urls.append(b['spotify'])
+
+	# add them to a dict, remove duplicates
+	temp_dict = dict(zip(names, urls))
+	r = remove_dict_dupes(temp_dict)
+	return r
 
 
 ##### COMPATIBILITY ("age") #####
