@@ -11,11 +11,6 @@
 
 a, p {
     font-size: 1.25vh;
-    line-height: 0.25vh;
-}
-
-#gh-link:hover, #about a:hover {
-    color: var(--scarlet);
 }
 
 /* HEADER */

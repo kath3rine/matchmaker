@@ -14,12 +14,21 @@ def home():
 # MATCH (user2's profile + stats)
 @app.route('/match', methods=["GET", "POST"])
 def match():
+
+  QUIET_PLAYLIST = 'https://open.spotify.com/playlist/2T75XDoKsI4dCgPxMXz7KV?si=ba9a7bd09e484287'
+  LOUD_PLAYLIST = 'https://open.spotify.com/playlist/2b08l28qJ61zKFztCRrNOl?si=42f49b25a17e41cf'
   
   # get urls/ids
   pid1y = request.form['input1']
-  pid1x =  request.form['input2']
   pid2 = request.form['input3']
   uid = request.form['input4']
+
+  # if request.form['option1'] is 'on' and request.form['option2'] is 'off': # dislikes loud
+  #   pid1x = 'https://open.spotify.com/playlist/2b08l28qJ61zKFztCRrNOl?si=42f49b25a17e41cf' 
+  # else: # dislikes quiet
+  #   pid1x = 'https://open.spotify.com/playlist/2T75XDoKsI4dCgPxMXz7KV?si=ba9a7bd09e484287' 
+
+  pid1x=LOUD_PLAYLIST if request.form['options'] == 'option1' else QUIET_PLAYLIST
 
   m = matchmaker(pid1y, pid1x, pid2, uid)
 
@@ -33,7 +42,7 @@ def match():
     rec_tracks_names = m['rec_tracks_names'], 
     rec_tracks_urls = m['rec_tracks_urls'],
     rec_artists_names = m['rec_artists_names'], 
-    rec_artists_urls = m['rec_artists_urls'])
+    rec_artists_urls = m['rec_artists_urls'], pid1x=pid1x)
 
 # LIKE A MATCH (add to queue)
 @app.route('/like', methods=['GET', 'POST'])
@@ -49,7 +58,8 @@ def like():
 # VIEW YOUR MATCHES
 @app.route('/saved', methods=['GET', 'POST'])
 def saved():
-  return render_template('saved.html', matches=matches, matches_pfp=matches_pfp, len_matches=len(matches))
+  return render_template('saved.html', 
+      matches=matches, matches_pfp=matches_pfp, len_matches=len(matches))
 
 if __name__ == '__main__':
     app.run(debug=True)

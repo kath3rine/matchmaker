@@ -29,18 +29,11 @@ body {
     display: flex;
 }
 
-label {
+.text-label {
     color: white;
     padding: 1% 2% 1% 2%;
     border-radius: 5px;;
-}
-
-input {
-    border-radius: 5px;
-    border: var(--lt-grey) solid 2px;
-    padding: 1%;
-    flex: 2;
-    margin-left: 3%;
+    width: 30%;
 }
 
 #label1, #label2 {
@@ -49,6 +42,37 @@ input {
 
 #label3, #label4 {
     background-color: var(--scarlet);
+}
+
+/* RADIO BUTTONS */
+
+.input-box {
+    border-radius: 5px;
+    border: var(--lt-grey) solid 2px;
+    padding: 1%;
+    flex: 2;
+    margin-left: 3%;
+}
+
+#radio-buttons {
+    align-items: center;
+    display: flex;
+    justify-content: left;
+    border: blue solid 2px;
+    z-index: 10;
+    border-radius: 5px;
+    border: var(--lt-grey) solid 2px;
+    padding: 1%;
+    flex: 2;
+    margin-left: 3%;
+}
+
+#radio-buttons input::placeholder {
+    color: green;
+}
+
+#option2 {
+    margin-left: 15px;
 }
 
 /* BOTTOM */
@@ -62,9 +86,9 @@ input {
 }
 
 #match-button:hover {
-    background-color: var(--orange);
+    color: var(--lt-grey);
 }
 
 a {
-    color: var(--lt-grey)
+    color: var(--grey)
 }

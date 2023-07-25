@@ -17,19 +17,27 @@
         <img id="logo" src="../static/test_image.png">
         <div id="input-section">
             <div class="input">
-                <label id="label1" for="input1">Songs you like:</label>
+                <label class="text-label" id="label1" for="input1">Songs you like:</label>
                 <input type="text" class="input-box" id="input1" name="input1" placeholder="playlist url">
             </div>
             <div class="input">
-                <label id="label2" for="input2">Songs you dislike (optional):</label>
-                <input type="text" class="input-box" id="input2" name="input2" placeholder="playlist url" value="https://open.spotify.com/playlist/2b08l28qJ61zKFztCRrNOl?si=42f49b25a17e41cf">
+                <label id="label2" class="text-label" for="input2">Type of music you dislike:</label>
+                <!--
+                    <input type="text" class="input-box" id="input2" name="input2" placeholder="playlist url" value="https://open.spotify.com/playlist/2b08l28qJ61zKFztCRrNOl?si=42f49b25a17e41cf">
+                -->
+                <div id="radio-buttons">
+                    <input type="radio" class="my-radio-button" id="option1" name="options" value="option1">Loud music</input>
+                    <input type="radio" class="my-radio-button" id="option2" name="options" value="option2">Quiet music</input>
+                </div>
             </div>
+
+        </br>
             <div class="input">
-                <label id="label3" for="input3">Songs they like:</label>
+                <label id="label3" class="text-label" for="input3">Songs they like:</label>
                 <input type="text" class="input-box" id="input3" name="input3" placeholder="playlist url">
             </div>        
             <div class="input">
-                <label id="label4" for="input4">Their username:</label>
+                <label id="label4" class="text-label" for="input4">Their username:</label>
                 <input type="text" class="input-box" id="input4" name="input4" placeholder="username"> 
             </div>
                     
@@ -37,7 +45,7 @@
         <input class="button" id="match-button" type="submit" value="Match">
     </form>
     
-    <p> insert tutorial/description here</p>
+    <p> quasi-satirical music-centric dating + recommendation app </br>(expand on instructions + description here)</p>
     <a href="https://github.com/kath3rine/tinderfy">learn more!</a>
     
 </body>
