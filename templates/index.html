@@ -12,53 +12,73 @@
     <form class="buttons" id="top" action="/saved" method="POST">
         <input class="button" type="submit" value="View Matches">
     </form>
+    
 
     <form action="/match" method="POST">
         <img id="logo" src="../static/test_image.png">
-        <div id="input-section">
+        <div id="input-container" class="container">
+            <p class="description" id="about">
+                Tinderfy is a quasi-satirical, music-centric "dating app" that evaluates a potential partner's compatibility by providing insight on their taste in music. <a href="https://github.com/kath3rine/tinderfy">learn more!</a>
+                
+            </p>
+
+            <!-- songs you like-->
             <div class="input">
                 <label class="text-label" id="label1" for="input1">Songs you like:</label>
                 <input type="text" class="input-box" id="input1" name="input1" placeholder="playlist url">
             </div>
+
+            <!-- type of music you dislike-->
             <div class="input">
                 <label id="label2" class="text-label" for="input2">Type of music you dislike:</label>
-                <!--
-                    <input type="text" class="input-box" id="input2" name="input2" placeholder="playlist url" value="https://open.spotify.com/playlist/2b08l28qJ61zKFztCRrNOl?si=42f49b25a17e41cf">
-                -->
-                <div id="radio-buttons">
-                    <input type="radio" class="my-radio-button" id="option1" name="options" value="option1">Loud music</input>
-                    <input type="radio" class="my-radio-button" id="option2" name="options" value="option2">Quiet music</input>
+                
+                <div class="radio-buttons">
+                    <input type="radio" class="my-radio-button" id="dislike1-option1" name="dislikes1" value="dislike1-option1">Loud music</input>
+                    <input type="radio" class="my-radio-button" id="dislike1-option2" name="dislikes1" value="dislike1-option2">Quiet music</input>
                 </div>
             </div>
 
         </br>
+            <!-- songs they like-->
             <div class="input">
                 <label id="label3" class="text-label" for="input3">Songs they like:</label>
                 <input type="text" class="input-box" id="input3" name="input3" placeholder="playlist url">
-            </div>        
+            </div>    
+
+            <!-- type of music they dislike-->
             <div class="input">
-                <label id="label4" class="text-label" for="input4">Their username:</label>
-                <input type="text" class="input-box" id="input4" name="input4" placeholder="username"> 
+                <label id="label4" class="text-label" for="input4">Type of music they dislike:</label>
+                
+                <div class="radio-buttons">
+                    <input type="radio" class="my-radio-button" id="dislike2-option1" name="dislikes2" value="dislike2-option1">Loud music</input>
+                    <input type="radio" class="my-radio-button" id="dislike2-option2" name="dislikes2" value="dislike2-option2">Quiet music</input>
+                </div>
+            </div>
+            
+            <!-- their username-->
+            <div class="input">
+                <label id="label5" class="text-label" for="input5">Their username:</label>
+                <input type="text" class="input-box" id="input5" name="input5" placeholder="username"> 
             </div>
                     
         
         <input class="button" id="match-button" type="submit" value="Match">
     </form>
     
-    <div class="description">
-        <p id="main-description"> 
-            A quasi-satirical, music-centric "dating app" that provides insight on a potential partner's taste in music, combining the intrigue of listening habits with the game-like addictiveness of dating apps. 
+    <div id="description-section">
+        <p class="description"> 
+            <strong>Instructions:</strong> </br>
+            Enter playlists of songs you and a potential match like, and select the type of music you and them dislike. You will get a "profile page" detailing their musical compatibility, including a compatibility score, artists/genres/audio traits they both like, and relevant recommendations. 
         </p>
-        <p>
-            Enter playlists of songs you and a potential match like, select the type of music you and them dislike, and get a "profile page" detailing their musical compatibility, including a compatibility score, artists/genres/audio traits they both like, and relevant recommendations. 
-        </p>
-        <a href="https://github.com/kath3rine/tinderfy">learn more!</a>
-        <p id="footnote">
+        
+        
+        <p class="description" id="footnote">
             * red bubbles indicate that both of you like that artist/genre</br>
             * the number next to their name indicates your compatibility score (higher = more similar)
         </p>
     
     </div>
+</div>
     
     
 </body>

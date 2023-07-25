@@ -1,8 +1,9 @@
 from helpers import get_image, get_artist_info, get_data, get_genres, create_df, find_compatibility, find_top, find_shared, find_features, recommend_artists, combine_df, recommend_tracks, contains_space
 
-def matchmaker(pid1y, pid1x, pid2, uid):
+def matchmaker(pid1y, pid1x, pid2y, pid2x, uid):
     # PARAMS 
-    # pid1, pid1x, pid2: playlist urls of songs user1 likes, user1 dislikes, and user2 likes, respectively
+    # pid1y, pid1x: songs user1 likes and dislikes
+    # pid2y, pid2x: songs user2 likes and dislikes
     # uid: user2's id
 
     # RETURNS
@@ -26,19 +27,21 @@ def matchmaker(pid1y, pid1x, pid2, uid):
 
     # splice pid from url
     pid1y, pid1x = pid1y[34 : -20], pid1x[34 : -20] 
-    pid2 = pid2[34 : -20] 
+    pid2y, pid2x = pid2y[34 : -20], pid2x[34 : -20] 
 
     # create dataframes 
     df1y = create_df(pid1y, 1) # user1 likes
     df1x = create_df(pid1x, 0) # user1 dislikes
+    df2y = create_df(pid2y, 1) # user2 likes
+    df2x = create_df(pid2x, 0) # user2 dislikes
     df1 = combine_df([df1y, df1x]) # all user1
-    df2 = create_df(pid2, 1) # user2
+    df2 = combine_df([df2y, df2x]) # all user2
 
     user_data = get_data(uid, 'users')
 
     # artists, genres, features
     a1 = df1y['artist_ids'].tolist() # artists per person, w dupes (ids)
-    a2 = df2['artist_ids'].tolist() 
+    a2 = df2y['artist_ids'].tolist() 
     top_a1 = find_top(a1, 1) # user1's top 2 artists (ids)
     top_a2 = find_top(a2, 3) # user2's top 3 artists (ids)
     a = find_shared([a1, a2])[ : 5] # top 5 shared artists (ids)
@@ -51,13 +54,13 @@ def matchmaker(pid1y, pid1x, pid2, uid):
 
     # HEADER
     # r['pfp'] = get_image(user_data)
-    r['pfp'] = get_image(get_data(pid2, 'playlists'))
+    r['pfp'] = get_image(get_data(pid2y, 'playlists'))
     r['user_pfp'] = get_image(user_data)
     r['name'] = user_data['display_name']
     r['compatibility'] = find_compatibility(df1[REDUCED_FEATURES], df1['likes'], df2[REDUCED_FEATURES], df2['likes']) * 100
 
     # PROMPTS 
-    r['sim_features'] = str(find_features(df1y, df2, VERY_REDUCED_FEATURES))[1 : -1]
+    r['sim_features'] = str(find_features(df1y, df2y, VERY_REDUCED_FEATURES))[1 : -1]
 
     # BUBBLES (shared + favs)
     r['s_artists'] = get_artist_info(a, 'name')

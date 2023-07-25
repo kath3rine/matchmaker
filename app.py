@@ -20,17 +20,14 @@ def match():
   
   # get urls/ids
   pid1y = request.form['input1']
-  pid2 = request.form['input3']
-  uid = request.form['input4']
+  pid2y = request.form['input3']
+  uid = request.form['input5']
 
-  # if request.form['option1'] is 'on' and request.form['option2'] is 'off': # dislikes loud
-  #   pid1x = 'https://open.spotify.com/playlist/2b08l28qJ61zKFztCRrNOl?si=42f49b25a17e41cf' 
-  # else: # dislikes quiet
-  #   pid1x = 'https://open.spotify.com/playlist/2T75XDoKsI4dCgPxMXz7KV?si=ba9a7bd09e484287' 
 
-  pid1x=LOUD_PLAYLIST if request.form['options'] == 'option1' else QUIET_PLAYLIST
+  pid1x=LOUD_PLAYLIST if request.form['dislikes1'] == 'dislike1-option1' else QUIET_PLAYLIST
+  pid2x=LOUD_PLAYLIST if request.form['dislikes2'] == 'dislike2-option1' else QUIET_PLAYLIST
 
-  m = matchmaker(pid1y, pid1x, pid2, uid)
+  m = matchmaker(pid1y, pid1x, pid2y, pid2x, uid)
 
   # render match page
   return render_template ('match.html', 

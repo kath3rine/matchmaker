@@ -1,27 +1,30 @@
 /* HEADER */
 
-body {
-    height: 100vh;
+
+.description {
+    padding: 2% 5% 2% 5%;
+    border-top: var(--lt-grey) solid 1px;
+}
+
+/* TOP */
+
+#about {
+    border-top: none;
+    border-bottom: var(--lt-grey) solid 1px;
+    padding-top: 0px;
 }
 
 #logo {
-    margin: 10% 10% 2% 10%;
+    margin: 10% 10% 0% 10%;
     width: 80%;
     height: 10vh;
     opacity: 0.4;
 }
 
 /* INPUTS */
-
-#input-section {
-    background-color: white;
-    margin: auto;
-    width: 70%;
-    padding: 5%;
-    border-radius: 10px;
-    height: 70vh;
-    align-items: center;
-    justify-content: center;
+#input-container {
+    padding-top: 3%;
+    padding-bottom: none;
 }
 
 .input {
@@ -34,6 +37,7 @@ body {
     padding: 1% 2% 1% 2%;
     border-radius: 5px;;
     width: 30%;
+    margin-left: 3%;
 }
 
 #label1, #label2 {
@@ -42,6 +46,10 @@ body {
 
 #label3, #label4 {
     background-color: var(--scarlet);
+}
+
+#label5 {
+    background-color: var(--pink);
 }
 
 /* RADIO BUTTONS */
@@ -54,7 +62,7 @@ body {
     margin-left: 3%;
 }
 
-#radio-buttons {
+.radio-buttons {
     align-items: center;
     display: flex;
     justify-content: left;
@@ -64,22 +72,15 @@ body {
     border: var(--lt-grey) solid 2px;
     padding: 1%;
     flex: 2;
+    font-size: 0.8rem;
     margin-left: 3%;
-}
-
-#radio-buttons input::placeholder {
-    color: green;
-}
-
-#option2 {
-    margin-left: 15px;
 }
 
 /* BOTTOM */
 #match-button {
     background-color: var(--pink);
     color: white;
-    margin: 5% 40% 10% 40%;
+    margin: 5% 40% 5% 40%;
     width: 20%;
     font-size: 1rem;
     padding: 2%;
@@ -88,6 +89,7 @@ body {
 #match-button:hover {
     color: var(--lt-grey);
 }
+
 
 a {
     color: var(--grey);
@@ -99,4 +101,10 @@ a:hover {
 
 #footnote {
     color: var(--lt-grey);
+    padding-bottom: 3%;
 }
+
+strong {
+    color: var(--dk-grey);
+}
+
