@@ -9,10 +9,92 @@
     <title>Tinderfy</title>
 </head>
 <body>
-    <h1> Your Matches </h1>
+    <form class="buttons" id="top" action="/" method="POST">
+        <input class="button" type="submit" value="Homepage">
+    </form>
+     <!--
         {% for i in range(0, len_matches) %}
         <p>{{matches[i]}}</p>
         <img src="{{matches_pfp[i]}}"/>
         {%endfor%}
+     -->
+     <div class="container" id="match-container">
+        
+        <strong class="subheading">New Matches</strong>
+        <div class=subsection id="new-matches">
+            
+
+            <div class="top-match">
+                <img class="top-pfp" src="../static/test_image.png"/> 
+                <p class="top-name">top name</p>
+            </div>
+
+            <div class="top-match">
+                <img class="top-pfp" src="../static/test_image.png"/> 
+                <p class="top-name">top name</p>
+            </div>
+
+            <div class="top-match">
+                <img class="top-pfp" src="../static/test_image.png"/> 
+                <p class="top-name">top name</p>
+            </div>
+
+            <div class="top-match">
+                <img class="top-pfp" src="../static/test_image.png"/> 
+                <p class="top-name">top name</p>
+            </div>
+        </div>
+
+        <div class=subsection id="messages">
+            <strong class="subheading" >Messages</strong>
+
+            <div class="match">
+                <img class="pfp" src="../static/test_image.png"/>
+                <div class="match-body">
+                    <span class="name">name</span>
+                    <span class="your-turn"> your turn </span>
+                    <p class="pf-link">link to profile</p>
+                </div>
+            </div>
+
+            <div class="match">
+                <img class="pfp" src="../static/test_image.png"/>
+                <div class="match-body">
+                    <span class="name">name</span>
+                    <span class="your-turn"> your turn </span>
+                    <p class="pf-link">link to profile</p>
+                </div>
+            </div>
+
+            <div class="match">
+                <img class="pfp" src="../static/test_image.png"/>
+                <div class="match-body">
+                    <span class="name">name</span>
+                    <span class="your-turn"> your turn </span>
+                    <p class="pf-link">link to profile</p>
+                </div>
+            </div>
+
+            <div class="match">
+                <img class="pfp" src="../static/test_image.png"/>
+                <div class="match-body">
+                    <span class="name">name</span>
+                    <span class="your-turn"> your turn </span>
+                    <p class="pf-link">link to profile</p>
+                </div>
+            </div>
+
+            <div class="match">
+                <img class="pfp" src="../static/test_image.png"/>
+                <div class="match-body">
+                    <span class="name">name</span>
+                    <span class="your-turn"> your turn </span>
+                    <p class="pf-link">link to profile</p>
+                </div>
+            </div>
+        </div>
+     
+    </div>
+
 </body>
 </html>
