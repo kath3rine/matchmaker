@@ -1,5 +1,6 @@
 secret.py 
 ignore 
 __pycache__
-static/test_image.png
-test.py
+test
+old
+test_data.py

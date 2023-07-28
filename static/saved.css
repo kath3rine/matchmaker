@@ -1,5 +1,82 @@
-img {
+#match-container {
+    padding: 3%;
+    margin-top: 10%;
+}
+
+.subheading {
+    color: var(--scarlet);
+    float: top;
+}
+
+/* NEW MATCHES */
+#new-matches {
+    display: flex;
+    margin-bottom: 10%;
+    justify-items: left;
+    height: 20vh;
+}
+
+.top-match {
+    text-align: center;
+    padding: 2%;
+}
+
+.top-name {
+    font-weight: 700;
+    color: var(--dk-grey);
+}
+
+.top-pfp {
+    border-radius: 5%;
+    width: 15vw;
+    height: 80%;
+    object-fit: cover;
+}
+
+/* MESSAGES */
+
+.match {
+    display: flex;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.match-body {
+    width: 80%;
+    margin-left: 2%;
+    border-bottom: var(--lt-grey) solid 1px;
+}
+
+.pfp {
     border-radius: 50%;
-    height: 50px;
-    width: 50px;
+    height: 10vw;
+    width: 10vw;
+    margin: 1%;
+}
+
+.name {
+    font-weight: 700;
+    color: var(--dk-grey);
+    padding-left: 2%;
+    padding-top: 2%;
+    font-size: 1.25rem;
+}
+
+.pf-link {
+    padding-left: 2%;
+    color: var(--lt-grey);
+}
+
+.your-turn {
+    color: white;
+    background-color: black;
+    border-radius: 30%;
+    height: 20%;
+    padding: 5px; 
+    margin: 1%;
+    right: 0%;
+    float: right;
+    font-size: 0.7rem;
+    text-align: center;
+    width: 15%;
 }

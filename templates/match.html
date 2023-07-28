@@ -36,6 +36,7 @@
                 <!-- INVISIBLE: to save username + pfp link for match page-->
                 <span><input type="text" value={{name}} id="name-here" name="name-here" placeholder="test"></span>
                 <span><input type="text" value={{user_pfp}} id="pfp-here" name="pfp-here" placeholder="test"></span>
+                <span><input type="text" value={{user_url}} id="url-here" name="url-here" placeholder="test"></span>
             </span>
                 
             </div>
@@ -51,17 +52,7 @@
                 {%for i in range(0, 4)%}
                     <a href={{rec_tracks_urls[i]}}>{{rec_tracks_names[i]}}</a></br>
                 {%endfor%}
-                
 
-                <!-- TEST DATA 
-                <a href=" https://open.spotify.com/artist/07D1Bjaof0NFlU32KXiqUP" class="rec-artist">- artist rec here</a></br>
-                <a href=" https://open.spotify.com/artist/07D1Bjaof0NFlU32KXiqUP" class="rec-artist">- artist rec here</a></br>
-                <a href=" https://open.spotify.com/artist/07D1Bjaof0NFlU32KXiqUP" class="rec-artist">- artist rec here</a>
-            </br>
-                <a href=" https://open.spotify.com/artist/07D1Bjaof0NFlU32KXiqUP" class="rec-track">- song rec by artist</a></br>
-                <a href=" https://open.spotify.com/artist/07D1Bjaof0NFlU32KXiqUP" class="rec-track">- song rec by another artist</a></br>
-                <a href=" https://open.spotify.com/artist/07D1Bjaof0NFlU32KXiqUP" class="rec-track">- another song rec by artist</a></br>
-                END TEST DATA -->
             </div>
 
             <!-- PROMPTS -->
@@ -92,15 +83,6 @@
                     {%endfor%}</br>
                 </p>
                     
-                
-
-                <!-- TEST DATA 
-                <p class="bubbles">
-                    <span class="bubble-red">artist here</span>
-                    <span class="bubble-red">artist here</span>
-                    <span class="bubble"> another artist here</span>
-                </p>
-                 END TEST DATA -->
 
             </div>
 
@@ -118,14 +100,6 @@
                     {%endfor%}</br>
                 </p>
                 
-
-                <!-- TEST DATA 
-                <p class="bubbles">
-                    <a class="bubble-red">genre here</a>
-                    <a class="bubble"> another genre here</a>
-                    <a class="bubble"> another genre here</a>
-                </p>
-                 END TEST DATA -->
                 
             </div>
                 <div class="buttons" id="swipe">
