@@ -1,5 +1,5 @@
-from playlist import Playlist
-from helpers import BASE_URL, headers, find_top, get_image, get_data, contains_space, get_artist_info
+from models.playlist import Playlist
+from models.helpers import BASE_URL, headers, find_top, get_data, get_image
 from sklearn.tree import DecisionTreeClassifier
 from statistics import mean
 import pandas as pd
@@ -7,10 +7,49 @@ import requests
 
 ##### HELPERS #####
 
+# PARAMS artist_ids: list of artist ids, key: target value
+# RETURNS list of key value for each artist
+def get_artist_info(artist_ids, key):
+    return [get_data(artist, 'artists')[key] for artist in artist_ids]
+
+
+# PARAM list of artist ids
+# RETURNS artist seed for rec
+def artist_seeds(artist_ids):
+    seed = 'artists='
+    for i in artist_ids:
+        seed += (i + '%2C')
+    return seed[ :-3]
+
+# PARAM list of genres
+# RETURNS seed for rec w/ ok genres (0 if not avail)
+def genres_seeds(genres):
+    r = []
+    avail = requests.get(BASE_URL + "recommendations/available-genre-seeds", headers=headers)
+    avail = avail.json()
+    avail = avail['genres']
+
+    # fixing names
+    for g in genres:
+        if g == 'alternative rock':
+            g = 'alt-rock'
+        g.replace(" ", "-")
+        if g in avail:
+            r.append(g)
+    
+    if len(r) == 0: # False
+        return 0
+    
+    seed = 'genres='
+    for i in r:
+        seed += (i + '%2C')
+    return seed[ : -3]
+
+
 class Match(Playlist):
 
-    REDUCED_FEATURES = ['danceability', 'energy', 'acousticness', 'valence', 'loudness', 'tempo', 'liveness', 'instrumentalness', 'mode']
-    VERY_REDUCED_FEATURES = ['danceability', 'energy', 'acousticness', 'valence', 'liveness', 'instrumentalness']   
+    REDUCED_FEATURES = ['danceability', 'energy', 'acousticness', 'valence', 'loudness', 'tempo', 'liveness', 'instrumentalness', 'mode', 'speechiness']
+    VERY_REDUCED_FEATURES = ['danceability', 'energy', 'acousticness', 'valence', 'liveness', 'instrumentalness', 'speechiness']   
 
     def __init__(self, pid1y, pid1x, pid2y, pid2x):
 
@@ -36,25 +75,21 @@ class Match(Playlist):
 
     # RETURNS artist (ids) in both "like" playlists (empty list if none)
     def shared_artists(self): 
-        x, y = [*set(self.aa)], [*set(self.ac)] # rm dupes
-        return list(set.intersection(*map(set, [x, y])))
+        return list(set.intersection(*map(set, [[*set(self.aa)], [*set(self.ac)]])))[ : 5]
     
 
     # RETURNS names of all shared artists (empty list if nont)
     def shared_artists_names(self):
-        x = self.shared_artists()
-        return get_artist_info(x, 'name') if len(x) != 0 else []
+        return get_artist_info(self.shared_artists(), 'name') if len(self.shared_artists()) != 0 else []
 
 
     # RETURNS all shared genres (str)
     def shared_genres(self): 
-        x, y = [*set(self.ga)], [*set(self.gc)] # rm
-        return list(set.intersection(*map(set, [x, y]))) 
+        return list(set.intersection(*map(set, [[*set(self.ga)], [*set(self.gc)] ])))[ : 5] 
 
 
     # RETURNS match's (c) fav artists names (strs)
     def match_fav_artists(self): 
-        x = find_top(self.ac, 3) # top 3 artist ids
         return get_artist_info(find_top(self.ac, 3), 'name') # return their names
 
     # RETURNS match's (c) fav genres (strs)
@@ -72,9 +107,9 @@ class Match(Playlist):
     # average of DTC's accuracy in predicting whether user 2 will like a song, and its accuracy in predicting whether user1 will like a song
     def find_compatibility(self):
  
-        # shorten "dislike" playlists to 50% length of "likes" playlists
-        dfb = self.dfb.iloc[0 : int(len(self.dfa.index) / 2)]
-        dfd = self.dfd.iloc[0 : int(len(self.dfc.index) / 2)]
+        # shorten "dislike" playlists to 525 length of "likes" playlists
+        dfb = self.dfb.iloc[0 : int(len(self.dfa.index) / 4)]
+        dfd = self.dfd.iloc[0 : int(len(self.dfc.index) / 4)]
 
         # combine both pl's for each user
         df1 = pd.concat([self.dfa, dfb])
@@ -96,6 +131,18 @@ class Match(Playlist):
         score2 = dtc2.score(X_train, y_train) # test on user1
         return mean([score1, score2])
     
+    # RETURNS str detailing compatibility
+    def comp_desc(self):
+        x = self.find_compatibility()
+        if x < 0.25:
+            return 'not compatible'
+        elif x < 0.5:
+            return 'somewhat incompatible'
+        elif x < 0.75:
+            return 'somewhat compatible'
+        else:
+            return 'compatible'
+    
     ##### PROMPTS #####
 
     # RETURNS dictionary of features where both users are w/in a certain threshold; key = features name, value = mean val
@@ -112,8 +159,7 @@ class Match(Playlist):
         for i in range(0, len(cols)):
             if df.iloc[2, i] < 0.05:
                 ft_list.append(cols[i])
-                x, y = df.iloc[0, i], df.iloc[1, i]
-                ft_val.append(mean([x, y]))
+                ft_val.append(mean([df.iloc[0, i], df.iloc[1, i]]))
         return dict(zip(ft_list, ft_val))
     
     ##### ABOUT ME #####
@@ -122,25 +168,18 @@ class Match(Playlist):
     def recommend_tracks(self):
         
         if len(self.shared_artists()) != 0: # shared artists
-            ids = self.shared_artists()
-            mode = 'artists'
-        elif len(self.shared_genres()) != 0 and contains_space(self.shared_genres()) is False: # shared genres
-            ids = self.shared_genres()
-            mode = 'genres'
+            seed = artist_seeds(self.shared_artists())
+        elif len(self.shared_genres()) != 0 and genres_seeds(self.shared_genres()) != 0: # shared genres
+            seed = genres_seeds(self.shared_genres())
         else: # top 2 artists per user
-            ids = find_top(self.aa, 2) + find_top(self.ac, 2)
-            mode='artists'
+            seed = artist_seeds(find_top(self.aa, 2) + find_top(self.ac, 2))
         
-        # generate seed (artist/genre + sim feat, if any)
-        seed = '='
-        for i in ids:
-            seed += (i + '%2C')
-        seed = seed[: -3] # remove the last comma
         for k, v in self.find_features().items():
             seed += ("&target_" + k + "=" + str(v))
+        print(seed)
             
         # API call
-        data = requests.get(BASE_URL + 'recommendations?limit=4&seed_' + mode + seed, headers=headers)
+        data = requests.get(BASE_URL + 'recommendations?limit=4&seed_' + seed, headers=headers)
         data = data.json()
 
         # get names + urls, return in a dict
@@ -149,10 +188,8 @@ class Match(Playlist):
         for track in data['tracks']:
             name = track['name'] + " by " + track['artists'][0]['name']
             names.append(name)
-            temp = track['external_urls']
-            urls.append(temp['spotify'])
+            urls.append(track['external_urls']['spotify'])
         
-
         return dict(zip(names, urls))
 
 
@@ -160,7 +197,7 @@ class Match(Playlist):
     def recommend_artists(self):
         # get seed
         if len(self.shared_artists()) != 0:
-            artist_ids = self.shared_artists()
+            artist_ids = self.shared_artists() + find_top(self.ac, 4 - len(self.shared_artists()))
         else:
             artist_ids = find_top(self.aa, 2) + find_top(self.ac, 2)
 
@@ -169,10 +206,8 @@ class Match(Playlist):
         for artist_id in artist_ids:
             data = requests.get(BASE_URL + 'artists/' + artist_id + '/related-artists', headers=headers)
             data = data.json()
-            a = data['artists'][0] 
-            names.append(a['name'])
-            b = a['external_urls']
-            urls.append(b['spotify'])
+            names.append(data['artists'][0]['name'])
+            urls.append(data['artists'][0]['external_urls']['spotify'])
 
         return dict(zip(names, urls))
   

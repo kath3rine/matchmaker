@@ -13,6 +13,10 @@ a, p {
     font-size: 1.25vh;
 }
 
+a:hover {
+    color: var(--scarlet);
+}
+
 /* HEADER */
 #header {
     padding: 5% 5% 0% 5%;
@@ -71,8 +75,8 @@ a, p {
 /* BUBBLES */
 
 .bubbles {
-    margin-top: 7%;
-    margin-bottom: 5%;
+    margin-top: 3%;
+    margin-bottom: 3%;
     display: flex;
     flex-wrap: wrap;
 }
@@ -84,11 +88,11 @@ a, p {
 }
 
 .bubble {
-    border: var(--lt-grey) solid 1px;
+    border: var(--lt-grey) solid 1.5px;
 }
 
 .bubble-red {
-    border: var(--scarlet) solid 1px;
+    border: var(--scarlet) solid 1.5px;
     color: var(--scarlet);
 }
 
@@ -103,14 +107,14 @@ a, p {
     top: 90vh;
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
-    margin-left: 10%;
-    margin-right: 10%;
+    width: 66vh;
+    justify-content: space-evenly;
 }
 
 #swipe input {
     border-radius: 50%;
-    height: 8vw;
-    width: 8vw;
+    height: 7vh;
+    width: 7vh;
     padding: 5%;
     border: none;
     font-size: 1.5rem;

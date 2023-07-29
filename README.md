@@ -13,7 +13,8 @@ For each of the four playlists, it creates a dataframe (table) of all the songs 
 - Creates lists of user 2's favorite artists/genres, and the artist/genres that both users like (like Tinder, artists/genres they have in common will appear red, not grey).
 
 #### Recommendations for both people ("about me" section):
-- Generates songs and artists (with links) both users would like by using the list of shared artists and/or genres as the seed for Spotify API's "get recommendations" and "related artists" endpoints, respectively
+- Generates songs both users would like using their top artists/genres and the mean of their similar features (see below) as the seed for the /recommendations endpoint
+- Generates artists both users would like using their top artists as the seed for the /related-artists endpoint
 
 #### Similar Audio Features ("prompts" section)
 - Takes the mean value of each audio feature for both users' "likes" playlists; if the difference between their means for a given feature is below a threshold (e.g. they both like songs with high energy), that feature will appear here
@@ -27,7 +28,7 @@ For each of the four playlists, it creates a dataframe (table) of all the songs 
 - Frontend: HTML, CSS
 - Backend: Flask (Python: scikit-learn, Pandas), Spotify API
 
-#### Depenencies
+#### Dependencies
 - Flask (1.1.2)
 - Python (3.9.13): Pandas, scikit-learn, requests, statistics
 

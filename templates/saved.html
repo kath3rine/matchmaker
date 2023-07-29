@@ -12,87 +12,50 @@
     <form class="buttons" id="top" action="/" method="POST">
         <input class="button" type="submit" value="Homepage">
     </form>
-     <!--
-        {% for i in range(0, len_matches) %}
-        <p>{{matches[i]}}</p>
-        <img src="{{matches_pfp[i]}}"/>
-        {%endfor%}
-     -->
+
      <div class="container" id="match-container">
         
-        <strong class="subheading">New Matches</strong>
-        <div class=subsection id="new-matches">
-            
+        <strong class="subheading"> New Matches </strong>
 
-            <div class="top-match">
-                <img class="top-pfp" src="../static/test_image.png"/> 
-                <p class="top-name">top name</p>
-            </div>
+        <div class="subsection" id="new-matches">
+            {% if n < 3 %}
+                {% for i in range(n) %}
+                        <div class="top-match">
+                            <img class="top-pfp" src={{matches_pfp[i]}}/>
+                            <a href={{matches_urls[i]}} class="top-name"> {{matches[i]}} </a>
+                        </div>
+                {% endfor %}
 
-            <div class="top-match">
-                <img class="top-pfp" src="../static/test_image.png"/> 
-                <p class="top-name">top name</p>
-            </div>
-
-            <div class="top-match">
-                <img class="top-pfp" src="../static/test_image.png"/> 
-                <p class="top-name">top name</p>
-            </div>
-
-            <div class="top-match">
-                <img class="top-pfp" src="../static/test_image.png"/> 
-                <p class="top-name">top name</p>
-            </div>
+            {% else %}
+                {% for i in range(0, 3) %}
+                        <div class="top-match">
+                            <img class="top-pfp" src={{matches_pfp[i]}}/>
+                            <a href={{matches_urls[i]}} class="top-name"> {{matches[i]}} </a>
+                        </div>
+                {% endfor %}
+            {% endif %}
         </div>
 
-        <div class=subsection id="messages">
-            <strong class="subheading" >Messages</strong>
+        
+        <div class="subsection" id="messages">
+            <strong class="subheading"> Messages </strong>
 
-            <div class="match">
-                <img class="pfp" src="../static/test_image.png"/>
-                <div class="match-body">
-                    <span class="name">name</span>
-                    <span class="your-turn"> your turn </span>
-                    <p class="pf-link">link to profile</p>
+            {% if n > 3 %}
+                {% for i in range(3, n) %}
+                <div class="match">
+                    <img class="pfp" src={{matches_pfp[i]}}/>
+                    <div class="match-body">
+                        <span class="name"> {{matches[i]}}</span>
+                        <span class="your-turn">your turn</span></br>
+                        <a href={{matches_urls[i]}} class="pf-link"> {{matches_urls[i]}}</a>
+                    </div>
                 </div>
-            </div>
-
-            <div class="match">
-                <img class="pfp" src="../static/test_image.png"/>
-                <div class="match-body">
-                    <span class="name">name</span>
-                    <span class="your-turn"> your turn </span>
-                    <p class="pf-link">link to profile</p>
-                </div>
-            </div>
-
-            <div class="match">
-                <img class="pfp" src="../static/test_image.png"/>
-                <div class="match-body">
-                    <span class="name">name</span>
-                    <span class="your-turn"> your turn </span>
-                    <p class="pf-link">link to profile</p>
-                </div>
-            </div>
-
-            <div class="match">
-                <img class="pfp" src="../static/test_image.png"/>
-                <div class="match-body">
-                    <span class="name">name</span>
-                    <span class="your-turn"> your turn </span>
-                    <p class="pf-link">link to profile</p>
-                </div>
-            </div>
-
-            <div class="match">
-                <img class="pfp" src="../static/test_image.png"/>
-                <div class="match-body">
-                    <span class="name">name</span>
-                    <span class="your-turn"> your turn </span>
-                    <p class="pf-link">link to profile</p>
-                </div>
-            </div>
+                    
+                {% endfor %}
+            {% endif %}
         </div>
+
+        
      
     </div>
 

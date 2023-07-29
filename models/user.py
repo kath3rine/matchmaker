@@ -1,4 +1,4 @@
-from helpers import get_image, get_data
+from models.helpers import get_data, get_image
 
 class User:
 

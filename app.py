@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template
-from user import User
-from match import Match
-import test_data as td
+from models.user import User
+from models.match import Match
+import models.test_data as td
 
 app = Flask(__name__)
 
@@ -19,7 +19,7 @@ def home():
 def match():
 
     QUIET = td.CLASSICAL
-    LOUD = td.ROCK2
+    LOUD = td.PUNK
    # get urls/ids
     pid1y = request.form['input1']
     pid2y = request.form['input3']
@@ -38,6 +38,7 @@ def match():
         name=u.name,
         pfp = m.get_match_image(),
         compatibility = str(m.find_compatibility() * 100)[ : 5],
+        comp_desc = m.comp_desc(),
         user_pfp = u.pfp,
         user_url = u.url,
         rec_tracks_names = list(rec_tracks.keys()),
@@ -48,7 +49,7 @@ def match():
         s_artists = m.shared_artists_names(),
         f_artists = m.match_fav_artists(),
         s_genres = m.shared_genres(),
-        f_genres = m.match_fav_genres(),
+        f_genres = m.match_fav_genres()
     )
 
 
@@ -74,8 +75,12 @@ def like():
 # VIEW YOUR MATCHES
 @app.route('/saved', methods=['GET', 'POST'])
 def saved():
+  print(matches_pfp)
   return render_template('saved.html', 
-      matches=matches, matches_pfp=matches_pfp, len_matches=len(matches))
+      matches=matches, 
+      matches_pfp=matches_pfp, 
+      matches_urls=matches_urls, 
+      n=len(matches))
 
 if __name__ == '__main__':
     app.run(debug=True)

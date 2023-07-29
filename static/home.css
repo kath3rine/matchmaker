@@ -15,10 +15,11 @@
 }
 
 #logo {
-    margin: 10% 10% 0% 10%;
-    width: 80%;
-    height: 10vh;
+    width: 94%;
+    position: relative;
+    height: 15vh;
     opacity: 0.4;
+    margin: 3%;
 }
 
 /* INPUTS */
@@ -108,3 +109,7 @@ strong {
     color: var(--dk-grey);
 }
 
+#big {
+    margin: auto;
+    width: 70vh;
+}
