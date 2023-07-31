@@ -17,6 +17,14 @@ a:hover {
     color: var(--scarlet);
 }
 
+.button {
+    margin: 10px;
+}
+
+#top {
+    justify-content: left;
+}
+
 /* HEADER */
 #header {
     padding: 5% 5% 0% 5%;

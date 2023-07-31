@@ -15,11 +15,16 @@
 }
 
 #logo {
-    width: 94%;
+    width: 80%;
     position: relative;
-    height: 15vh;
-    opacity: 0.4;
-    margin: 3%;
+    height: 12vh;
+    margin-top: 8%;
+    left: 10%;
+    object-fit: cover;
+}
+
+#top {
+    justify-content: left;
 }
 
 /* INPUTS */
@@ -65,9 +70,7 @@
 
 .radio-buttons {
     align-items: center;
-    display: flex;
     justify-content: left;
-    border: blue solid 2px;
     z-index: 10;
     border-radius: 5px;
     border: var(--lt-grey) solid 2px;
@@ -75,6 +78,10 @@
     flex: 2;
     font-size: 0.8rem;
     margin-left: 3%;
+}
+
+.my-radio-button {
+    margin-left: 10%;
 }
 
 /* BOTTOM */

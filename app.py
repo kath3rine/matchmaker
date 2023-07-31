@@ -18,15 +18,31 @@ def home():
 @app.route('/match', methods=["GET", "POST"])
 def match():
 
-    QUIET = td.CLASSICAL
-    LOUD = td.PUNK
    # get urls/ids
     pid1y = request.form['input1']
     pid2y = request.form['input3']
     uid = request.form['input5']
 
-    pid1x=LOUD if request.form['dislikes1'] == 'dislike1-option1' else QUIET
-    pid2x=LOUD if request.form['dislikes2'] == 'dislike2-option1' else QUIET
+    button1 = request.form['dislikes1']
+    button2 = request.form['dislikes2']
+
+    if button1 == 'dislike1-option1':
+       pid1x = td.POP
+    elif button1 == 'dislike1-option2':
+       pid1x = td.ROCK
+    elif button1 == 'dislike1-option3':
+       pid1x = td.RAP
+    else:
+       pid1x = td.CLASSICAL
+    
+    if button2 == 'dislike2-option1':
+       pid2x = td.POP
+    elif button2 == 'dislike2-option2':
+       pid2x = td.ROCK
+    elif button2 == 'dislike2-option3':
+       pid2x = td.RAP
+    else:
+       pid2x = td.CLASSICAL
 
     u = User(uid)
     m = Match(pid1y, pid1x, pid2y, pid2x)

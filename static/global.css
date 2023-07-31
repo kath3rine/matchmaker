@@ -32,6 +32,10 @@ body {
     color: var(--grey);
 }
 
+* a:hover {
+    color: var(--scarlet);
+}
+
 .container {
     background-color: white;
     border-radius: 20px;

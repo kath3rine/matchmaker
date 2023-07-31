@@ -131,17 +131,18 @@ class Match(Playlist):
         score2 = dtc2.score(X_train, y_train) # test on user1
         return mean([score1, score2])
     
-    # RETURNS str detailing compatibility
+
+    # RETURNS discretized compatibility (qualitative)
     def comp_desc(self):
         x = self.find_compatibility()
         if x < 0.25:
-            return 'not compatible'
-        elif x < 0.5:
-            return 'somewhat incompatible'
+            return "not compatible"
+        elif x < 0.5: 
+            return "somewhat incompatible"
         elif x < 0.75:
-            return 'somewhat compatible'
+            return "somewhat compatible"
         else:
-            return 'compatible'
+            return "compatible"
     
     ##### PROMPTS #####
 
