@@ -23,9 +23,6 @@
     object-fit: cover;
 }
 
-#top {
-    justify-content: left;
-}
 
 /* INPUTS */
 #input-container {
@@ -81,7 +78,9 @@
 }
 
 .my-radio-button {
-    margin-left: 10%;
+    margin-left: 5%;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 /* BOTTOM */

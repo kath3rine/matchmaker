@@ -6,7 +6,7 @@ import models.test_data as td
 app = Flask(__name__)
 
 # GLOBAL vars: info abt matched users
-matches, matches_pfp, matches_urls = [], [], []
+matches, matches_pfp, matches_urls, matches_comps = [], [], [], []
 
 
 # HOMEPAGE (input data/"disliked' redirect")
@@ -49,6 +49,7 @@ def match():
 
     rec_tracks = m.recommend_tracks()
     rec_artists = m.recommend_artists()
+    my_anthem = m.my_anthem()
 
     return render_template('match.html',
         name=u.name,
@@ -65,9 +66,13 @@ def match():
         s_artists = m.shared_artists_names(),
         f_artists = m.match_fav_artists(),
         s_genres = m.shared_genres(),
-        f_genres = m.match_fav_genres()
+        f_genres = m.match_fav_genres(),
+        anthem_name = my_anthem['name'],
+        anthem_artist=my_anthem['artist'],
+        anthem_album = my_anthem['album'],
+        anthem_preview = my_anthem['preview'],
+        anthem_url=my_anthem['url']
     )
-
 
 
 # LIKE A MATCH (add to queue)
@@ -77,6 +82,7 @@ def like():
     match_name = request.form['name-here']
     match_pfp = request.form['pfp-here']
     match_url = request.form['url-here']
+    match_comp = request.form['comp-here']
 
     global matches
     matches.append(match_name)
@@ -84,6 +90,8 @@ def like():
     matches_pfp.append(match_pfp)
     global matches_urls
     matches_urls.append(match_url)
+    global matches_comps
+    matches_comps.append(match_comp)
 
     return render_template('index.html')
 
@@ -96,6 +104,7 @@ def saved():
       matches=matches, 
       matches_pfp=matches_pfp, 
       matches_urls=matches_urls, 
+      matches_comps=matches_comps,
       n=len(matches))
 
 if __name__ == '__main__':

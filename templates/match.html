@@ -39,6 +39,7 @@
                 <span><input type="text" value={{name}} id="name-here" name="name-here" placeholder="test"></span>
                 <span><input type="text" value={{user_pfp}} id="pfp-here" name="pfp-here" placeholder="test"></span>
                 <span><input type="text" value={{user_url}} id="url-here" name="url-here" placeholder="test"></span>
+                <span><input type="text" value={{compatibility}} id="comp-here" name="comp-here" placeholder="test"></span>
             </span>
                 
             </div>
@@ -104,6 +105,21 @@
                 
                 
             </div>
+
+            <div class="section" id="anthem">
+                <h2> My Anthem</h2>
+                <div id="my-anthem">
+                    <div id="anthem-body">
+                        <a href={{anthem_url}}>{{anthem_name}}</a></br>
+                        <span id="anthem-artist">{{anthem_artist}}</span></br>
+                        <audio src={{anthem_preview}} controls></audio>
+                    </div>
+                    <div id="anthem-audio">
+                        <img src={{anthem_album}}>
+                </div>
+                
+            </div>
+
                 <div class="buttons" id="swipe">
                     <span>
                         <input class='button' id="like" type="submit" value="♥︎">

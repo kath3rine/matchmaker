@@ -4,6 +4,7 @@ from sklearn.tree import DecisionTreeClassifier
 from statistics import mean
 import pandas as pd
 import requests
+import random
 
 ##### HELPERS #####
 
@@ -135,11 +136,12 @@ class Match(Playlist):
     # RETURNS discretized compatibility (qualitative)
     def comp_desc(self):
         x = self.find_compatibility()
+        print(x)
         if x < 0.25:
             return "not compatible"
-        elif x < 0.5: 
+        elif x < 0.5 and x >= 0.25: 
             return "somewhat incompatible"
-        elif x < 0.75:
+        elif x < 0.75 and x >= 0.5:
             return "somewhat compatible"
         else:
             return "compatible"
@@ -212,6 +214,21 @@ class Match(Playlist):
 
         return dict(zip(names, urls))
   
+    # RETURNS dict: track title, track artist, preview url, album image
+    def my_anthem(self):
+        r = dict()
+        while True:
+            x = random.choice(self.c.get_track_info('id'))
+            data = get_data(x, 'tracks')
+            if data['preview_url'] is not None:
+                break
+
+        r['name'] = data['name']
+        r['artist'] = data['artists'][0]['name']
+        r['album'] = get_image(data['album'])
+        r['preview'] = data['preview_url']
+        r['url'] = data['external_urls']['spotify']
+        return r
     
  
     

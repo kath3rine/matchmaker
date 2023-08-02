@@ -6,5 +6,5 @@ class User:
         self.uid = uid
         self.data = get_data(self.uid, 'users')
         self.name = self.data['display_name']
-        self.pfp = get_image(self.data)
+        self.pfp = get_image(get_data(self.uid, 'users'))
         self.url = self.data['external_urls']['spotify']

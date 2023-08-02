@@ -15,44 +15,22 @@
 
      <div class="container" id="match-container">
         
-        <strong class="subheading"> New Matches </strong>
-
-        <div class="subsection" id="new-matches">
-            {% if n < 3 %}
-                {% for i in range(n) %}
-                        <div class="top-match">
-                            <img class="top-pfp" src={{matches_pfp[i]}}/>
-                            <a href={{matches_urls[i]}} class="top-name"> {{matches[i]}} </a>
-                        </div>
-                {% endfor %}
-
-            {% else %}
-                {% for i in range(0, 3) %}
-                        <div class="top-match">
-                            <img class="top-pfp" src={{matches_pfp[i]}}/>
-                            <a href={{matches_urls[i]}} class="top-name"> {{matches[i]}} </a>
-                        </div>
-                {% endfor %}
-            {% endif %}
-        </div>
 
         
         <div class="subsection" id="messages">
-            <strong class="subheading"> Messages </strong>
+            <strong class="subheading"> New Matches </strong>
 
-            {% if n > 3 %}
-                {% for i in range(3, n) %}
+                {% for i in range(n) %}
                 <div class="match">
-                    <img class="pfp" src={{matches_pfp[i]}}/>
+                    <img class="pfp" src={{matches_pfp[i]}}>
                     <div class="match-body">
-                        <span class="name"> {{matches[i]}}</span>
+                        <span class="name"> <a href={{matches_urls[i]}}> {{matches[i]}}</a></span>
                         <span class="your-turn">your turn</span></br>
-                        <a href={{matches_urls[i]}} class="pf-link"> {{matches_urls[i]}}</a>
+                        <span class="pf-link"> {{matches_comps[i]}}% compatible </span>
                     </div>
                 </div>
                     
                 {% endfor %}
-            {% endif %}
         </div>
 
         

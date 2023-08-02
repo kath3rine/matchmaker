@@ -8,30 +8,6 @@
     float: top;
 }
 
-/* NEW MATCHES */
-#new-matches {
-    display: flex;
-    margin-bottom: 10%;
-    justify-items: left;
-    height: 20vh;
-}
-
-.top-match {
-    text-align: center;
-    padding: 2%;
-}
-
-.top-name {
-    font-weight: 700;
-    color: var(--dk-grey);
-}
-
-.top-pfp {
-    border-radius: 5%;
-    width: 15vw;
-    height: 80%;
-    object-fit: cover;
-}
 
 /* MESSAGES */
 
@@ -49,14 +25,14 @@
 
 .pfp {
     border-radius: 50%;
-    height: 10vw;
-    width: 10vw;
+    height: 8vw;
+    width: 8vw;
     margin: 1%;
 }
 
-.name {
+a {
     font-weight: 700;
-    color: var(--dk-grey);
+    color: black;
     padding-left: 2%;
     padding-top: 2%;
     font-size: 1.25rem;
@@ -78,5 +54,4 @@
     float: right;
     font-size: 0.7rem;
     text-align: center;
-    width: 15%;
 }
